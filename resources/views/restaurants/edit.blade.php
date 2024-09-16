@@ -13,10 +13,10 @@
         <strong>Name:</strong>
         <input type="text" name="name" value="{{ $restaurant->name }}" placeholder="Name">
     </div>
-    <div>
+    <!-- <div>
         <strong>Image:</strong>
         <input type="text" name="image" value="{{ $restaurant->image }}" placeholder="Image">
-    </div>
+    </div> -->
     <div>
         <strong>Description:</strong>
         <textarea style="height:150px" name="description" placeholder="description"></textarea>

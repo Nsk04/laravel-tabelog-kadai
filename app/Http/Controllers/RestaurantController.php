@@ -43,7 +43,7 @@ class RestaurantController extends Controller
     {
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
-        $restaurant->image = $request->input('image');
+        /* $restaurant->image = $request->input('image'); */
         $restaurant->description = $request->input('description');
         $restaurant->lowest_price = $request->input('lowest_price');
         $restaurant->highest_price = $request->input('highest_price');
@@ -94,7 +94,7 @@ class RestaurantController extends Controller
     {
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
-        $restaurant->image = $request->input('image');
+        /* $restaurant->image = $request->input('image'); */
         $restaurant->description = $request->input('description');
         $restaurant->lowest_price = $request->input('lowest_price');
         $restaurant->highest_price = $request->input('highest_price');
@@ -118,12 +118,12 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        $product->delete();
+        $restaurant->delete();
 
         return to_route('restaurants.index');
     }
 
-    public function favorite(restaeurant $restaurant)
+    public function favorite(Restaurant $restaurant)
     {
         Auth::user()->togglefavorite($restaurant);
 

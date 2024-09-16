@@ -10,11 +10,11 @@
     {{$restaurant->name}}
 </div>
 
-<div>
+<!-- <div>
     <strong>Image:</strong>
     {{$$restaurant->image}}
 </div>
-
+-->
 <div>
     <strong>Description:</strong>
     {{$product->description}}
