@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm samuraimart-header-container">
+<nav class="navbar navbar-expand-md navbar-light shadow-sm kadai_002-header-container">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
-      <img src="{{asset('img/logo.jpg')}}">
+      <img src="{{asset('img/logo.jpg')}}" class="header-logo">
     </a>
     <form class="row g-1">
       <div class="col-auto">

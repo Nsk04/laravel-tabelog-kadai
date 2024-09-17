@@ -16,8 +16,8 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
-
+        $products = restaurant::paginate(20);
+        
         return view('restaurants.index', compact('restaurants'));
     }
 
@@ -50,13 +50,13 @@ class RestaurantController extends Controller
         $restaurant->phone_number = $request->input('phone_number');
         $restaurant->open_time = $request->input('open_time');
         $restaurant->close_time = $request->input('close_time');
-        $restaurant->closed_day = $request->input('closed_time');
+        $restaurant->closed_day = $request->input('closed_day');
         $restaurant->post_code = $request->input('post_code');
         $restaurant->address = $request->input('address');
         $restaurant->category_id = $request->input('category_id');
         $restaurant->save();
 
-        return to_route('restaurant.index');
+        return to_route('restaurants.index');
     }
 
     /**
@@ -67,7 +67,9 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('restaurants.index', compact('restaurants'));
+        $reviews = $restaurant->reviews()->get();
+
+        return view('restaurants.show', compact('restaurant', 'reviews'));
     }
 
     /**
@@ -80,7 +82,7 @@ class RestaurantController extends Controller
     {
         $categories = Category::all();
 
-        return view('restaurants.create', compact('categories'));
+        return view('restaurants.edit', compact('restaurant', 'categories'));
     }
 
     /**
@@ -107,7 +109,7 @@ class RestaurantController extends Controller
         $restaurant->category_id = $request->input('category_id');
         $restaurant->update();
 
-        return to_route('restaurant.index');
+        return to_route('restaurants.index');
     }
 
     /**
