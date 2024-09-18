@@ -17,8 +17,10 @@ class RestaurantController extends Controller
     public function index()
     {
         $products = restaurant::paginate(20);
-        
-        return view('restaurants.index', compact('restaurants'));
+        $categories = Category::all();
+        $food_category = Category::pluck('$food_categories')->unique();
+
+        return view('restaurants.index', compact('restaurants', 'categories', '$food_categories'));
     }
 
     /**
