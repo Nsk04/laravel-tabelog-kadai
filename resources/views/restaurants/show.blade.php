@@ -89,7 +89,8 @@
                 <hr>
                 <b>営業時間</b>
                 <p class="">
-                    {{$restaurant->open_time}}~{{$restaurant->close_time}}
+                    {{ date('H:i', strtotime($restaurant->open_time)) }}~{{ date('H:i', strtotime($restaurant->close_time)) }}
+
                 </p>
                 <hr>
                 <b>定休日</b>
@@ -154,7 +155,7 @@
                         @enderror
                         <textarea name="content" class="form-control m-2"></textarea>
                         <input type="hidden" name="product_id" value="{{$restaurant->id}}">
-                        <button type="submit" class="btn kadai_002-submit-button ml-2">レビューを追加</button>
+                        <button type="submit" class="btn ml=2 btn-info w-50">レビューを追加</button>
                     </form>
                 </div>
             </div>

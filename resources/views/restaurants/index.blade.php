@@ -47,10 +47,16 @@
 @section('content')
 <div class="row">
     <div class="col-2">
-        @component('components.sidebar', ['categories' => $categories, 'food_categories' => $food_categories])
+        @component('components.sidebar', ['categories' => $categories])
         @endcomponent
     </div>
     <div class="col-9">
+    <div class="container">
+            @if ($category !== null)
+                <a href="{{ route('restaurants.index') }}">トップ</a> > {{ $category->name }}
+                <h1>{{ $category->name }}の店舗一覧{{$total_count}}件</h1>
+            @endif
+        </div>
         <div class="container mt-4">
             <div class="row w-100">
                 @foreach($restaurants as $restaurant)
@@ -70,7 +76,7 @@
                 @endforeach
             </div>
         </div>
-        {{ $restaurants->links() }}
+        {{ $restaurants->appends(request()->query())->links() }}
     </div>
 </div>
 @endsection
