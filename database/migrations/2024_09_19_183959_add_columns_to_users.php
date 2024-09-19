@@ -13,19 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+        Schema::table('users', function (Blueprint $table) {
             $table->string('post_code');
             $table->text('address');
             $table->string('phone_number');
-            $table->date('birth_date');
             $table->boolean('premium_member');
             $table->date('premium_member_expiration')->nullable();
-            $table->date('registered_date');
-            $table->timestamps();
+            $table->date('cancellation_date')->nullable()->after('premium_member_expiration');
         });
     }
 
@@ -36,6 +30,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

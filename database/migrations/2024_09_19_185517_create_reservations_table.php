@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurant_id')->constrained('restaurants')->cascadeOnDelete(); // 出店情報の外部キー
-            $table->foreignId('member_id')->constrained('members')->cascadeOnDelete(); // 会員情報の外部キー
+            $table->foreignId('restaurant_id')->constrained('restaurants')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->dateTime('reservation_date');
             $table->integer('reservation_people');
             $table->timestamps();
