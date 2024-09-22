@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CompanyInfo;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
-class CompanyInfoController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CompanyInfoController extends Controller
      */
     public function index()
     {
-        $companies = CompanyInfo::all();
+        $companies = Company::all();
 
         return view('company.index', compact('companies'));
     }
@@ -37,7 +37,7 @@ class CompanyInfoController extends Controller
      */
     public function store(Request $request)
     {
-        $company = new CompanyInfo();
+        $company = new Company();
         $company->company_name = $request->input('company_name');
         $company->representative = $request->input('representative');
         $company->establishment_date = $request->input('establishment_date');
@@ -51,10 +51,10 @@ class CompanyInfoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CompanyInfo  $companyInfo
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(CompanyInfo $companyInfo)
+    public function show(Company $company)
     {
         return view('company.show', compact('company'));
     }
@@ -62,10 +62,10 @@ class CompanyInfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CompanyInfo  $companyInfo
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(CompanyInfo $companyInfo)
+    public function edit(Company $company)
     {
         return view('company.edit', compact('company'));
     }
@@ -74,14 +74,12 @@ class CompanyInfoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CompanyInfo  $companyInfo
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CompanyInfo $companyInfo)
+    public function update(Request $request, Company $company)
     {
-        
-        $company = CompanyInfo::findOrFail($request->id);
-
+        $company = Company::findOrFail($request->id);
         $company->company_name = $request->input('company_name');
         $company->representative = $request->input('representative');
         $company->establishment_date = $request->input('establishment_date');
@@ -91,17 +89,17 @@ class CompanyInfoController extends Controller
         $company->business_description = $request->input('business_description');
         $company->update();
 
-        
         return to_route('company.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CompanyInfo  $companyInfo
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CompanyInfo $companyInfo)
+    public function destroy(Company $company)
     {
         $company->delete();
 
