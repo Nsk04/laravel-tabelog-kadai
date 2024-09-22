@@ -51,6 +51,12 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone_number' => ['required', 'string'],
+            'post_code' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'premium_member' => ['required', 'string'],
+            'premium_member_expiration' => ['required', 'string'],
+            'cancellation_date' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -66,6 +72,12 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone_number' => $data['phone_number'],
+            'post_code' => $data['post_code'],
+            'address' => $data['address'],
+            'premium_member' => $data['premium_member'],
+            'premium_member_expiration' => $data['premium_member_expiration'],
+            'cancellation_date' => $data['cancellation_data'],
             'password' => Hash::make($data['password']),
         ]);
     }
