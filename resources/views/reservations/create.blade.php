@@ -22,7 +22,7 @@
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">ホーム</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('restaurants.index') }}">店舗一覧</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('restaurants.show', $restaurant) }}">店舗詳細</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('restaurants.show', $restaurant->id) }}">店舗詳細</a></li>
                         <li class="breadcrumb-item active" aria-current="page">予約</li>
                     </ol>
                 </nav>

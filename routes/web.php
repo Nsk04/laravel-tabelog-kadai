@@ -5,7 +5,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\CompanyInfoController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +33,10 @@ Route::controller(UserController::class)->group(function () {
 
 Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
+Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
+Route::get('/search', [WebController::class, 'search'])->name('search');
+
+
 /* Route::resource('reservations', ReservationController::class)->middleware(['auth', 'verified']); */
 Route::get('reservations/index', [ReservationController::class, 'index'])->name('reservations.index');
 Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');

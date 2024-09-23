@@ -93,7 +93,7 @@ label {
 
 .header-logo {
   width: 100px; /* 画像の幅を指定 */
-  height: 500px; /* 高さを自動調整 */
+  height: auto; /* 高さを自動調整 */
 }
 
 .footer-logo {
