@@ -17,8 +17,9 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'content' => 'required'
-        ]);
+            'content' => 'required',
+            'restaurant_id' => 'required|exists:restaurants,id' // ここで必須かつ存在するrestaurant_idであることを確認
+    ]);
 
         $review = new Review();
         $review->content = $request->input('content');
