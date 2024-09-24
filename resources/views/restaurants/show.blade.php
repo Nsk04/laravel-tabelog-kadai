@@ -104,7 +104,7 @@
                             <strong>レビュー内容を入力してください</strong>
                         @enderror
                         <textarea name="content" class="form-control m-2"></textarea>
-                        <input type="hidden" name="product_id" value="{{$restaurant->id}}">
+                        <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
                         <button type="submit" class="btn ml=2 btn-info w-50">レビューを追加</button>
                     </form>
                 </div>

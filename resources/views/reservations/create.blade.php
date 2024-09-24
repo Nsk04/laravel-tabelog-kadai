@@ -44,7 +44,7 @@
                         <a class="nav-link link-dark" href="{{ route('restaurants.show', $restaurant) }}">トップ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-white kadai_002-bg" aria-current="page" href="{{ route('restaurants.reservations.create', $restaurant) }}">予約</a>
+                    <a class="nav-link active text-white kadai_002-bg" aria-current="page" href="{{ route('reservations.create', $restaurant) }}">予約</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-dark" href="{{ route('restaurants.reviews.index', $restaurant) }}">レビュー</a>

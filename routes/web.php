@@ -34,12 +34,13 @@ Route::controller(UserController::class)->group(function () {
 Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
 Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
-Route::get('/search', [WebController::class, 'search'])->name('search');
 
 
 /* Route::resource('reservations', ReservationController::class)->middleware(['auth', 'verified']); */
 Route::get('reservations/index', [ReservationController::class, 'index'])->name('reservations.index');
 Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
+Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
+
 
 Route::resource('restaurants', RestaurantController::class)->middleware(['auth', 'verified']);
 Auth::routes(['verify' => true]);
