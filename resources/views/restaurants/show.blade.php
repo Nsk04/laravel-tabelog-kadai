@@ -46,6 +46,7 @@
                 <p class="">
                     {{$restaurant->address}}
                 </p>
+                <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-primary">予約する</a>
             </div>
             @auth
             <form method="POST" class="m-3 align-items-end">

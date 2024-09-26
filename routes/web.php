@@ -32,15 +32,17 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
+Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index'])->name('restaurants.reviews.index');
 Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
 Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
 
 /* Route::resource('reservations', ReservationController::class)->middleware(['auth', 'verified']); */
 Route::get('reservations/index', [ReservationController::class, 'index'])->name('reservations.index');
-Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
-Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
-
+Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->name('restaurants.reservations.create');
+Route::post('/restaurants/{restaurant}/reservations', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
+Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 
 Route::resource('restaurants', RestaurantController::class)->middleware(['auth', 'verified']);
 Auth::routes(['verify' => true]);

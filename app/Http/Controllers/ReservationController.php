@@ -17,7 +17,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::where('user_id', Auth::id())->get();
+
 
         return view('reservations.index', compact('reservations'));
     }
@@ -27,10 +28,8 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Restaurant $restaurant)
     {
-        $restaurant = Restaurant::find($request->restaurant_id);
-
         return view('reservations.create', compact('restaurant'));
     }
 
@@ -42,6 +41,12 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'reservation_date' => 'required|date|after_or_equal:today',
+            'reservation_time' => 'required',
+            'number_of_people' => 'required|integer|min:1|max:50',
+        ]);
+
         $reservation = new Reservation();
         $reservation->restaurant_id = $request->input('restaurant_id');
         $reservation->user_id = Auth::user()->id;

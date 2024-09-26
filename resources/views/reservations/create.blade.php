@@ -6,10 +6,12 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
     <script>
         flatpickr("#reservation_date", {
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            locale: "ja",
-            minDate: "today", // 今日以降の日付のみ選択可能
+            enableTime: true, 
+            dateFormat: "Y-m-d H:i", 
+            locale: "ja", 
+            minDate: "today", 
+            time_24hr: true, 
+            minuteIncrement: 30, 
         });
     </script>
 @endpush
@@ -44,7 +46,7 @@
                         <a class="nav-link link-dark" href="{{ route('restaurants.show', $restaurant) }}">トップ</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link active text-white kadai_002-bg" aria-current="page" href="{{ route('reservations.create', $restaurant) }}">予約</a>
+                    <a class="nav-link active text-white kadai_002-bg" aria-current="page" href="{{ route('restaurants.reservations.create', $restaurant) }}">予約</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-dark" href="{{ route('restaurants.reviews.index', $restaurant) }}">レビュー</a>
