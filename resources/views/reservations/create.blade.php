@@ -1,18 +1,20 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endpush
+
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
     <script>
         flatpickr("#reservation_date", {
-            enableTime: true, 
-            dateFormat: "Y-m-d H:i", 
-            locale: "ja", 
-            minDate: "today", 
-            time_24hr: true, 
-            minuteIncrement: 30, 
-        });
+        enableTime: false, 
+        dateFormat: "Y-m-d", 
+        locale: "ja", 
+        minDate: "today", 
+    });
     </script>
 @endpush
 
@@ -41,7 +43,7 @@
                     </div>
                 @endif
 
-                <ul class="nav nav-tabs mb-3">
+                <!-- <ul class="nav nav-tabs mb-3">
                     <li class="nav-item">
                         <a class="nav-link link-dark" href="{{ route('restaurants.show', $restaurant) }}">トップ</a>
                     </li>
@@ -51,7 +53,7 @@
                     <li class="nav-item">
                         <a class="nav-link link-dark" href="{{ route('restaurants.reviews.index', $restaurant) }}">レビュー</a>
                     </li>
-                </ul>
+                </ul> -->
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -81,8 +83,8 @@
                         <div class="col-md-7">
                             <select class="form-control form-select" id="reservation_time" name="reservation_time">
                                 <option value="" hidden>選択してください</option>
-                                @for ($i = 0; $i <= (strtotime($restaurant->closing_time) - strtotime($restaurant->opening_time)) / 1800; $i++)
-                                    {{ $reservation_time = date('H:i', strtotime($restaurant->opening_time . '+' . $i * 30 . 'minute')) }}
+                                @for ($i = 0; $i <= (strtotime($restaurant->close_time) - strtotime($restaurant->open_time)) / 1800; $i++)
+                                    {{ $reservation_time = date('H:i', strtotime($restaurant->open_time . '+' . $i * 30 . 'minute')) }}
                                     @if ($reservation_time == old('reservation_time'))
                                         <option value="{{ $reservation_time }}" selected>{{ $reservation_time }}</option>
                                     @else

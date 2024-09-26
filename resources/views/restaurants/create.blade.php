@@ -1,73 +1,8 @@
-<!-- <div>
-    <h2>Add New Restaurant</h2>
-</div>
-<div>
-    <a href="{{ route('restaurants.index') }}"> Back</a>
-</div>
-
-<form action="{{ route('restaurants.store') }}" method="POST">
-    @csrf
-
-    <div>
-        <strong>Name:</strong>
-        <input type="text" name="name" placeholder="Name">
-    </div>
-    <div>
-        <strong>Image:</strong>
-        <input type="text" name="image" placeholder="Image">
-    </div>
-    <div>
-        <strong>Description:</strong>
-        <textarea style="height:150px" name="description" placeholder="Description"></textarea>
-    </div>
-    <div>
-        <strong>Lowest Price:</strong>
-        <input type="number" name="lowest_price" placeholder="Lowest Price">
-    </div>
-    <div>
-        <strong>Highest Price:</strong>
-        <input type="number" name="highest_price" placeholder="Highest Price">
-    </div>
-    <div>
-        <strong>Phone Number:</strong>
-        <input type="tel" name="phone_number" placeholder="Phone Number">
-    </div>
-    <div>
-        <strong>Open Time:</strong>
-        <input type="time" name="open_time" placeholder="Open Time">
-    </div>
-    <div>
-        <strong>Close Time:</strong>
-        <input type="time" name="close_time" placeholder="Close Time">
-    </div>
-    <div>
-        <strong>Closed Day:</strong>
-        <input type="text" name="closed_time" placeholder="Closed Day">
-    </div>
-    <div>
-        <strong>Post Code:</strong>
-        <input type="text" name="post_code" placeholder="Post Code">
-    </div>
-    <div>
-        <strong>Address:</strong>
-        <input type="text" name="address" placeholder="Address">
-    </div>
-    <div>
-        <strong>Category:</strong>
-        <select name="category_id">
-        @foreach ($categories as $category)
-        <option value="{{ $category->id }}">{{ $category->name }}</option>
-        @endforeach
-        </select>
-    </div>
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-
-</form> -->
-
-
 @extends('layouts.app')
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endpush
 
 @section('content')
 <div class="container">

@@ -118,7 +118,7 @@ class RestaurantController extends Controller
         $restaurant->category_id = $request->input('category_id');
         $restaurant->update();
 
-        return to_route('restaurants.index');
+        return to_route('restaurants.index')->with('success', '店舗情報が更新されました。');
     }
 
     /**
@@ -131,13 +131,13 @@ class RestaurantController extends Controller
     {
         $restaurant->delete();
 
-        return to_route('restaurants.index');
+        return redirect()->route('restaurants.index')->with('success', 'レストランを削除しました。');
     }
 
     public function favorite(Restaurant $restaurant)
     {
         Auth::user()->togglefavorite($restaurant);
 
-        return back();
+        return back()->with('success', 'お気に入り状態が更新されました。');
     }
 }

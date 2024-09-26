@@ -16,7 +16,7 @@ class CompanyController extends Controller
     {
         $companies = Company::all();
 
-        return view('company.index', compact('companies'));
+        return view('companies.index', compact('companies'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company.create');
+        return view('companies.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        return view('company.show', compact('company'));
+        return view('companies.show', compact('company'));
     }
 
     /**
@@ -67,7 +67,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view('company.edit', compact('company'));
+        return view('companies.edit', compact('company'));
     }
 
     /**
@@ -89,7 +89,7 @@ class CompanyController extends Controller
         $company->business_description = $request->input('business_description');
         $company->update();
 
-        return to_route('company.index');
+        return to_route('companies.index');
 
     }
 
@@ -103,6 +103,6 @@ class CompanyController extends Controller
     {
         $company->delete();
 
-        return to_route('company.index');
+        return to_route('companies.index');
     }
 }

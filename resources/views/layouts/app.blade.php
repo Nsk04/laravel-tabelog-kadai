@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/kadai_002.css') }}" rel="stylesheet">
+    @stack('styles')
 </head>
 <body>
 
@@ -34,5 +35,6 @@
 
         
     </div>
+    @stack('scripts')
 </body>
 </html>

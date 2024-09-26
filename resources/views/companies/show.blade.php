@@ -13,13 +13,13 @@
                 <p class="card-text"><strong>住所:</strong> {{ $company->address }}</p>
                 <p class="card-text"><strong>事業内容:</strong> {{ $company->business_description }}</p>
 
-                <a href="{{ route('company.edit', $company->id) }}" class="btn btn-warning">編集</a>
-                <form action="{{ route('company.destroy', $company->id) }}" method="POST" style="display:inline;">
+                <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-warning">編集</a>
+                <form action="{{ route('companies.destroy', $company->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">削除</button>
                 </form>
-                <a href="{{ route('company.index') }}" class="btn btn-secondary">戻る</a>
+                <a href="{{ route('companies.index') }}" class="btn btn-secondary">戻る</a>
             </div>
         </div>
     </div>

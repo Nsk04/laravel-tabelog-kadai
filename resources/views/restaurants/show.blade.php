@@ -31,7 +31,6 @@
                 <b>営業時間</b>
                 <p class="">
                     {{ date('H:i', strtotime($restaurant->open_time)) }}~{{ date('H:i', strtotime($restaurant->close_time)) }}
-
                 </p>
                 <hr>
                 <b>定休日</b>
@@ -107,6 +106,17 @@
                         <textarea name="content" class="form-control m-2"></textarea>
                         <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
                         <button type="submit" class="btn ml=2 btn-info w-50">レビューを追加</button>
+                                            @auth
+                        @if($review->user_id === Auth::id())
+                            <a href="{{ route('reviews.edit', $review->id) }}" class="btn btn-secondary">編集</a>
+
+                            <form method="POST" action="{{ route('reviews.destroy', $review->id) }}" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">削除</button>
+                            </form>
+                        @endif
+                        @endauth
                     </form>
                 </div>
             </div>

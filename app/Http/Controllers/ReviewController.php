@@ -16,6 +16,10 @@ class ReviewController extends Controller
     public function create()
     {
 
+        $categories = Review::all();
+
+        return view('restaurants.create', compact('categories'));
+
     }
 
     /**
@@ -49,6 +53,10 @@ class ReviewController extends Controller
     public function edit(Review $restaurant)
     {
 
+        $categories = Review::all();
+
+        return view('restaurants.edit', compact('restaurant', 'categories'));
+
     }
 
     /**
@@ -60,6 +68,14 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $restaurant)
     {
+        $request->validate([
+            'content' => 'required',
+            'score' => 'required|integer|min:1|max:5',
+        ]);
+
+        $review->content = $request->input('content');
+        $review->score = $request->input('score');
+        $review->save();
     
     }
 
@@ -71,6 +87,9 @@ class ReviewController extends Controller
      */
     public function destroy(Review $restaurant)
     {
+        $restaurant->delete();
+
+        return to_route('restaurants.index');
     
     }
 

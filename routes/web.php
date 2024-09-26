@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\WebController;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -32,6 +33,10 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+
 
 Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index'])->name('restaurants.reviews.index');
 Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
@@ -43,6 +48,8 @@ Route::get('reservations/index', [ReservationController::class, 'index'])->name(
 Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->name('restaurants.reservations.create');
 Route::post('/restaurants/{restaurant}/reservations', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
 Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+
+Route::resource('companies', CompanyController::class);
 
 Route::resource('restaurants', RestaurantController::class)->middleware(['auth', 'verified']);
 Auth::routes(['verify' => true]);
