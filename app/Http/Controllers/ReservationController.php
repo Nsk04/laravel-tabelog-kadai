@@ -44,7 +44,7 @@ class ReservationController extends Controller
         $request->validate([
             'reservation_date' => 'required|date|after_or_equal:today',
             'reservation_time' => 'required',
-            'number_of_people' => 'required|integer|min:1|max:50',
+            'reservation_people' => 'required|integer|min:1|max:50',
         ]);
 
         $reservation = new Reservation();
@@ -54,7 +54,7 @@ class ReservationController extends Controller
         $reservation->reservation_people = $request->input('reservation_people');
         $reservation->save();
 
-        return to_route('resavations.index');
+        return to_route('reservations.index');
     }
 
     /**

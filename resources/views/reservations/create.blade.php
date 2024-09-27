@@ -96,10 +96,10 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label for="number_of_people" class="col-md-5 col-form-label text-md-left fw-bold">人数</label>
+                        <label for="reservation_people" class="col-md-5 col-form-label text-md-left fw-bold">人数</label>
 
                         <div class="col-md-7">
-                            <select class="form-select" id="number_of_people" name="number_of_people">
+                            <select class="form-select" id="reservation_people" name="reservation_people">
                                 <option value="" hidden>選択してください</option>
                                 @for ($i = 1; $i <=50; $i++)
                                     <option value="{{ $i }}">{{ $i }}名</option>
@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="form-group d-flex justify-content-center mb-4">
-                        <button type="submit" class="btn text-white shadow-sm w-50 nagoyameshi-btn">予約する</button>
+                        <button type="submit" class="btn text-black shadow-sm w-50 kadai_002-btn">予約する</button>
                     </div>
                 </form>
 

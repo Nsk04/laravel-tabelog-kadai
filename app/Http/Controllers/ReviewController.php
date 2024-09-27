@@ -50,12 +50,14 @@ class ReviewController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $restaurant)
+    public function edit(Review $review)
     {
 
-        $categories = Review::all();
+        if ($review->user_id !== Auth::id()) {
+            return redirect()->route('restaurants.show', $review->restaurant_id)->with('error', '権限がありません。');
+        }
 
-        return view('restaurants.edit', compact('restaurant', 'categories'));
+        return view('reviews.edit', compact('review'));
 
     }
 
@@ -66,17 +68,23 @@ class ReviewController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $restaurant)
+    public function update(Request $request, Review $review)
     {
         $request->validate([
             'content' => 'required',
             'score' => 'required|integer|min:1|max:5',
         ]);
 
-        $review->content = $request->input('content');
-        $review->score = $request->input('score');
-        $review->save();
-    
+        if ($review->user_id !== Auth::id()) {
+            return redirect()->route('restaurants.show', $review->restaurant_id)->with('error', '権限がありません。');
+        }
+
+        $review->update([
+            'score' => $request->score,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('restaurants.show', $review->restaurant_id)->with('success', 'レビューを更新しました。');
     }
 
     /**
@@ -85,11 +93,15 @@ class ReviewController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $restaurant)
+    public function destroy(Review $review)
     {
-        $restaurant->delete();
+        if ($review->user_id !== Auth::id()) {
+            return redirect()->route('restaurants.show', $review->restaurant_id)->with('error', '権限がありません。');
+        }
 
-        return to_route('restaurants.index');
+        $review->delete();
+
+        return redirect()->route('restaurants.show', $review->restaurant_id)->with('success', 'レビューを削除しました。');
     
     }
 

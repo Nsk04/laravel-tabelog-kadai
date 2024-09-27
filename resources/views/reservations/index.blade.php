@@ -17,14 +17,14 @@
                     <form action="" method="post" name="cancelReservationForm">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="btn text-white shadow-sm nagoyameshi-btn-danger">削除</button>
+                        <button type="submit" class="btn text-white shadow-sm kadai_002-btn-danger">削除</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container nagoyameshi-container pb-5">
+    <div class="container kadai_002-container pb-5">
         <div class="row justify-content-center">
             <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10">
                 <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -66,7 +66,7 @@
                                     </a>
                                 </td>
                                 <td>{{ date('Y年n月j日 G時i分', strtotime($reservation->reserved_datetime)) }}</td>
-                                <td>{{ $reservation->number_of_people }}名</td>
+                                <td>{{ $reservation->reservation_people }}名</td>
                                 <td>
                                     @if ($reservation->reserved_datetime > now())
                                         <a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#cancelReservationModal" data-reservation-id="{{ $reservation->id }}" data-restaurant-name="{{ $reservation->restaurant->name }}">キャンセル</a>
