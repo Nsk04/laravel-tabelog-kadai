@@ -32,7 +32,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage/favorite', 'favorite')->name('mypage.favorite');
 });
 
-Route::get('reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
 Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
 Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');

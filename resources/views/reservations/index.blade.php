@@ -61,7 +61,7 @@
                         @foreach ($reservations as $reservation)
                             <tr>
                                 <td>
-                                    <a href="{{ route('restaurants.show', $reservation->restaurant) }}">
+                                    <a href="{{ route('restaurants.show', ['restaurant' => $reservation->restaurant->id]) }}">
                                         {{ $reservation->restaurant->name }}
                                     </a>
                                 </td>
