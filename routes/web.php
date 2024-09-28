@@ -23,6 +23,13 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/',  [WebController::class, 'index'])->name('top');
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('restaurants', RestaurantController::class)->except(['index', 'show']);
+});
+
+Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
+Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
+
 Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->name('mypage');
     Route::get('users/mypage/edit', 'edit')->name('mypage.edit');
@@ -31,6 +38,7 @@ Route::controller(UserController::class)->group(function () {
     Route::put('users/mypage/password', 'update_password')->name('mypage.update_password');
     Route::get('users/mypage/favorite', 'favorite')->name('mypage.favorite');
 });
+
 
 Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
@@ -43,15 +51,13 @@ Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'f
 Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
 
-/* Route::resource('reservations', ReservationController::class)->middleware(['auth', 'verified']); */
-Route::get('reservations/index', [ReservationController::class, 'index'])->name('reservations.index');
-Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->name('restaurants.reservations.create');
-Route::post('/restaurants/{restaurant}/reservations', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
+Route::get('reservations/index', [ReservationController::class, 'index'])->middleware(['auth', 'verified'])->name('reservations.index');
+Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->middleware(['auth', 'verified'])->name('restaurants.reservations.create');
+Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
 Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 
 Route::resource('companies', CompanyController::class);
 
-Route::resource('restaurants', RestaurantController::class)->middleware(['auth', 'verified']);
 Auth::routes(['verify' => true]);
 
 

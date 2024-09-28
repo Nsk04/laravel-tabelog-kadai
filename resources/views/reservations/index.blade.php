@@ -17,7 +17,7 @@
                     <form action="" method="post" name="cancelReservationForm">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="btn text-white shadow-sm kadai_002-btn-danger">削除</button>
+                        <button type="submit" class="btn text-white shadow-sm kadai_002-btn-danger" onclick="return confirm('本当に実行しますか?');">削除</button>
                     </form>
                 </div>
             </div>
@@ -61,15 +61,20 @@
                         @foreach ($reservations as $reservation)
                             <tr>
                                 <td>
-                                    <a href="{{ route('restaurants.show', ['restaurant' => $reservation->restaurant->id]) }}">
-                                        {{ $reservation->restaurant->name }}
+                                    <a href="{{ route('restaurants.show', ['restaurant' => $reservation->restaurant_id]) }}">
+                                        {{ $reservation->restaurant_name }}
                                     </a>
                                 </td>
                                 <td>{{ date('Y年n月j日 G時i分', strtotime($reservation->reserved_datetime)) }}</td>
                                 <td>{{ $reservation->reservation_people }}名</td>
                                 <td>
-                                    @if ($reservation->reserved_datetime > now())
-                                        <a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#cancelReservationModal" data-reservation-id="{{ $reservation->id }}" data-restaurant-name="{{ $reservation->restaurant->name }}">キャンセル</a>
+                                    @if ($reservation->reserved_datetime < now())
+                                        <!-- <a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#cancelReservationModal" data-reservation-id="{{ $reservation->id }}" data-restaurant-name="{{ $reservation->restaurant_name }}">キャンセル</a> -->
+                                        <form method="POST" action="{{ route('reservations.destroy' , $reservation->id)}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-info" onclick="return confirm('本当に実行しますか?');">キャンセル</button>
+                                        </form>
                                     @endif
                                 </td>
                             </tr>

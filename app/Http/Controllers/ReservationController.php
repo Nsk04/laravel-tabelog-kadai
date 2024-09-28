@@ -19,6 +19,11 @@ class ReservationController extends Controller
     {
         $reservations = Reservation::where('user_id', Auth::id())->get();
 
+        foreach($reservations as $reservation){
+            $restaurant = Restaurant::find($reservation->restaurant_id);
+          /*   dd($restaurant); */
+            $reservation->restaurant_name = $restaurant->name;
+        }
 
         return view('reservations.index', compact('reservations'));
     }
@@ -54,7 +59,7 @@ class ReservationController extends Controller
         $reservation->reservation_people = $request->input('reservation_people');
         $reservation->save();
 
-        return to_route('reservations.index');
+        return to_route('restaurants.index');
     }
 
     /**
@@ -67,6 +72,6 @@ class ReservationController extends Controller
     {
         $reservation->delete();
 
-        return to_route('reservations.index');
+        return redirect()->route('reservations.index')->with('success', 'レビューを削除しました。');
     }
 }

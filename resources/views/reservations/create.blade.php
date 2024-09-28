@@ -65,7 +65,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('restaurants.reservations.store', $restaurant) }}">
+                <form method="POST" action="{{ route('restaurants.reservations.store') }}">
                     @csrf
 
                     <input type="hidden" name="restaurant_id", value="{{ $restaurant->id }}">

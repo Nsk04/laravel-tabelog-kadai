@@ -54,9 +54,6 @@ class RegisterController extends Controller
             'phone_number' => ['required', 'string'],
             'post_code' => ['required', 'string'],
             'address' => ['required', 'string'],
-            'premium_member' => ['required', 'string'],
-            'premium_member_expiration' => ['required', 'string'],
-            'cancellation_date' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -75,9 +72,9 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'post_code' => $data['post_code'],
             'address' => $data['address'],
-            'premium_member' => $data['premium_member'],
-            'premium_member_expiration' => $data['premium_member_expiration'],
-            'cancellation_date' => $data['cancellation_data'],
+            'premium_member' => 0,
+/*             'premium_member_expiration' => $data['premium_member_expiration'],
+            'cancellation_date' => $data['cancellation_data'], */
             'password' => Hash::make($data['password']),
         ]);
     }
