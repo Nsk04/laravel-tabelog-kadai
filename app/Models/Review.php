@@ -9,6 +9,8 @@ class Review extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['score','content'];
+
     public function restaurant()
     {
         return $this->belongsTo(Restaurant::class);
