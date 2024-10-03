@@ -43,18 +43,6 @@
                     </div>
                 @endif
 
-                <!-- <ul class="nav nav-tabs mb-3">
-                    <li class="nav-item">
-                        <a class="nav-link link-dark" href="{{ route('restaurants.show', $restaurant) }}">トップ</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active text-white kadai_002-bg" aria-current="page" href="{{ route('restaurants.reservations.create', $restaurant) }}">予約</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-dark" href="{{ route('restaurants.reviews.index', $restaurant) }}">レビュー</a>
-                    </li>
-                </ul> -->
-
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="mb-0">

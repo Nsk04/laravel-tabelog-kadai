@@ -7,7 +7,6 @@ use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class ReservationController extends Controller
 {
     /**
@@ -21,7 +20,6 @@ class ReservationController extends Controller
 
         foreach($reservations as $reservation){
             $restaurant = Restaurant::find($reservation->restaurant_id);
-          /*   dd($restaurant); */
             $reservation->restaurant_name = $restaurant->name;
         }
 
@@ -35,7 +33,42 @@ class ReservationController extends Controller
      */
     public function create(Restaurant $restaurant)
     {
-        return view('reservations.create', compact('restaurant'));
+        // 定休日の文字列を曜日に変換
+        $closedDays = $this->parseClosedDays($restaurant->closed_day);
+
+        return view('reservations.create', compact('restaurant', 'closedDays'));
+    }
+
+    /**
+     * Helper function to parse closed_days string to an array of weekdays
+     * 定休日を文字列から曜日配列に変換するヘルパー関数
+     */
+    private function parseClosedDays($closedDayText)
+    {
+        // 曜日と対応する配列を作成
+        $dayOfWeekMap = [
+            "月" => 1, // 月曜日
+            "火" => 2, // 火曜日
+            "水" => 3, // 水曜日
+            "木" => 4, // 木曜日
+            "金" => 5, // 金曜日
+            "土" => 6, // 土曜日
+            "日" => 0, // 日曜日
+        ];
+
+        // 定休日の文字列が空の場合は空の配列を返す
+        if (empty($closedDayText)) {
+            return []; // 定休日が設定されていない場合は空の配列を返す
+        }
+
+        // 複数の定休日がカンマ区切りで渡される場合も対応
+        $closedDaysArray = explode(',', $closedDayText);  // カンマ区切りで分割
+
+        // 曜日に対応する数値を配列で返す
+        return array_map(function($dayChar) use ($dayOfWeekMap) {
+            $dayChar = trim(mb_substr($dayChar, 2, 1)); // 各曜日を抽出
+            return $dayOfWeekMap[$dayChar] ?? null; // 存在する曜日ならその数値、そうでなければ null
+        }, $closedDaysArray);
     }
 
     /**
@@ -59,7 +92,17 @@ class ReservationController extends Controller
         $reservation->reservation_people = $request->input('reservation_people');
         $reservation->save();
 
-        return to_route('restaurants.index');
+        return redirect()->route('reservations.complete');
+    }
+
+    /**
+     * 予約完了画面を表示する
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function complete()
+    {
+        return view('reservations.complete');
     }
 
     /**

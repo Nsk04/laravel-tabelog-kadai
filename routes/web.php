@@ -55,6 +55,9 @@ Route::get('reservations/index', [ReservationController::class, 'index'])->middl
 Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->middleware(['auth', 'verified'])->name('restaurants.reservations.create');
 Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
 Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+Route::get('reservations/complete', [ReservationController::class, 'complete'])->name('reservations.complete');
+Route::get('/', [WebController::class, 'index'])->name('top');
+
 
 Route::resource('companies', CompanyController::class);
 
@@ -63,3 +66,4 @@ Auth::routes(['verify' => true]);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

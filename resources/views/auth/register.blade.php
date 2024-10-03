@@ -85,6 +85,38 @@
                     </div>
                 </div>
 
+                <!-- ここから有料会員チェックボックスとクレジットカード情報を追加 -->
+                <div class="form-group">
+                    <label for="premium_member">
+                        <input type="checkbox" id="premium_member" name="premium_member" value="1"> 有料会員になる（月々300円）
+                    </label>
+                </div>
+
+                <div id="credit-card-info" style="display:none;">
+                    <h4>クレジットカード情報</h4>
+                    <div class="form-group">
+                        <label for="card_number">カード番号</label>
+                        <input type="text" name="card_number" id="card_number" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="expiry_date">有効期限</label>
+                        <input type="text" name="expiry_date" id="expiry_date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvc">CVC</label>
+                        <input type="text" name="cvc" id="cvc" class="form-control">
+                    </div>
+                </div>
+
+                <script>
+                    document.getElementById('premium_member').addEventListener('change', function() {
+                        var display = this.checked ? 'block' : 'none';
+                        document.getElementById('credit-card-info').style.display = display;
+                    });
+                </script>
+                <!-- 有料会員機能の追加部分ここまで -->
+
+
                 <div class="form-group">
                     <button type="submit" class="btn samuraimart-submit-button w-100">
                         アカウント作成
