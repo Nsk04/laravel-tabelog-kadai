@@ -4,19 +4,47 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endpush
 
-
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
     <script>
-        flatpickr("#reservation_date", {
-        enableTime: false, 
-        dateFormat: "Y-m-d", 
-        locale: "ja", 
-        minDate: "today", 
-    });
+        document.addEventListener('DOMContentLoaded', function () {
+            const closedDays = @json($closedDays);
+
+            flatpickr("#reservation_date", {
+                enableTime: false,
+                dateFormat: "Y-m-d",
+                locale: "ja",
+                minDate: "today",
+                disable: [
+                    function(date) {
+                        const dayOfWeek = date.getDay();
+                        return closedDays.includes(dayOfWeek);
+                    }
+                ],
+            });
+
+            console.log("Min time: {{ $minReservationTime }}");
+            console.log("Max time: {{ $maxReservationTime }}");
+
+            flatpickr("#reservation_time", {
+                enableTime: true, 
+                noCalendar: true, 
+                dateFormat: "H:i",
+                time_24hr: true,
+                minuteIncrement: 30,
+                minTime: "{{ $minReservationTime }}",  // 予約可能開始時刻
+                maxTime: "{{ $maxReservationTime }}",  // 予約可能終了時刻
+                onReady: function() {
+                    console.log("Flatpickr initialized with minTime:", "{{ $minReservationTime }}");
+                    console.log("Flatpickr initialized with maxTime:", "{{ $maxReservationTime }}");
+                }
+            });
+        });
     </script>
 @endpush
+
+
 
 @section('content')
     <div class="container kadai_002-container pb-5">
@@ -72,7 +100,7 @@
                             <select class="form-control form-select" id="reservation_time" name="reservation_time">
                                 <option value="" hidden>選択してください</option>
                                 @for ($i = 0; $i <= (strtotime($restaurant->close_time) - strtotime($restaurant->open_time)) / 1800; $i++)
-                                    {{ $reservation_time = date('H:i', strtotime($restaurant->open_time . '+' . $i * 30 . 'minute')) }}
+                                    {{ $reservation_time = date('H:i', strtotime($restaurant->open_time . '+' . $i * 30 . <!-- 'minute -->')) }}
                                     @if ($reservation_time == old('reservation_time'))
                                         <option value="{{ $reservation_time }}" selected>{{ $reservation_time }}</option>
                                     @else

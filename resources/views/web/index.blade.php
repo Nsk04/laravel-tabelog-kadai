@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-2">
-        @component('components.sidebar', ['categories' => $categories])
-        @endcomponent
-    </div>
-</div>
 
 <div class="form-group">
         <label for="category-id">{{ __('カテゴリー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
@@ -16,5 +10,13 @@
             @endforeach
         </select>
     </div>
+
+<div class="row">
+    <div class="col-2">
+        @component('components.sidebar', ['categories' => $categories])
+        @endcomponent
+    </div>
+</div>
+
 
     

@@ -65,7 +65,7 @@
                                         {{ $reservation->restaurant_name }}
                                     </a>
                                 </td>
-                                <td>{{ date('Y年n月j日 G時i分', strtotime($reservation->reserved_datetime)) }}</td>
+                                <td>{{ \Carbon\Carbon::parse($reservation->reservation_date)->format('Y年n月j日') }} {{ \Carbon\Carbon::parse($reservation->reservation_time)->format('H:i') }}</td>
                                 <td>{{ $reservation->reservation_people }}名</td>
                                 <td>
                                     @if ($reservation->reserved_datetime < now())
