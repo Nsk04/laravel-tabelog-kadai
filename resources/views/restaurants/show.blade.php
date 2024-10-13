@@ -45,7 +45,24 @@
                 <p class="">
                     {{$restaurant->address}}
                 </p>
-                <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-primary">予約する</a>
+
+                <!-- 予約ボタンの追加部分 -->
+                @auth
+                    @if(Auth::user()->premium_member && (!Auth::user()->premium_member_expiration || Auth::user()->premium_member_expiration->isFuture()))
+                        <!-- 有料会員かつ有効期限内の場合のみ、予約ボタンを表示 -->
+                        <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-primary">予約する</a>
+                    @else
+                        <!-- 有料会員でない場合や有効期限が切れている場合はメッセージを表示 -->
+                        <p class="text-danger">予約するには有料会員になる必要があります。</p>
+                        <a href="{{ route('membership.upgrade') }}" class="btn btn-secondary">有料会員にアップグレード</a>
+                    @endif
+                @else
+                    <!-- ログインしていない場合はログインを促す -->
+                    <a href="{{ route('login') }}" class="btn btn-primary">ログインして予約する</a>
+                @endauth
+                <!-- ここまで予約ボタンの追加部分 -->
+                <!-- <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-primary">予約する</a> -->
+                
             </div>
             @auth
             <form method="POST" class="m-3 align-items-end">

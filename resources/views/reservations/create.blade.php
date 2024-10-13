@@ -100,7 +100,7 @@
                             <select class="form-control form-select" id="reservation_time" name="reservation_time">
                                 <option value="" hidden>選択してください</option>
                                 @for ($i = 0; $i <= (strtotime($restaurant->close_time) - strtotime($restaurant->open_time)) / 1800; $i++)
-                                    {{ $reservation_time = date('H:i', strtotime($restaurant->open_time . '+' . $i * 30 . <!-- 'minute -->')) }}
+                                    {{ $reservation_time = date('H:i', strtotime($restaurant->open_time . '+' . $i * 30 . 'minute')) }}
                                     @if ($reservation_time == old('reservation_time'))
                                         <option value="{{ $reservation_time }}" selected>{{ $reservation_time }}</option>
                                     @else

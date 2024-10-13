@@ -7,6 +7,10 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Cashier\Cashier; // Laravel Cashierのインポート
+use Carbon\Carbon; // 日付操作用
+use Stripe\Exception\CardException;
+
 
 class RegisterController extends Controller
 {
@@ -55,6 +59,9 @@ class RegisterController extends Controller
             'post_code' => ['required', 'string'],
             'address' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'card_number' => ['nullable', 'string'], // クレジットカード番号
+            'expiry_date' => ['nullable', 'string'], // 有効期限
+            'cvc' => ['nullable', 'string'], // CVC
         ]);
     }
 
@@ -73,9 +80,26 @@ class RegisterController extends Controller
             'post_code' => $data['post_code'],
             'address' => $data['address'],
             'premium_member' => 0,
-/*             'premium_member_expiration' => $data['premium_member_expiration'],
-            'cancellation_date' => $data['cancellation_data'], */
             'password' => Hash::make($data['password']),
         ]);
+         // 有料会員が選択された場合の処理
+        if (isset($data['premium_member'])) {
+            // Stripe顧客を作成し、支払い方法を設定
+            try {
+                $paymentMethod = $data['payment_method']; // フロントエンドで取得した支払い方法ID
+                $user->createOrGetStripeCustomer(); // Stripe顧客作成
+                $user->updateDefaultPaymentMethod($paymentMethod); // 支払い方法を設定
+
+                // サブスクリプション作成（月額300円のプラン）
+                $user->newSubscription('default', 'price_1Q7FzQ04OpOW60oOS2kiNCJm')
+                    ->create($paymentMethod);
+
+            } catch (CardException $e) {
+                // エラーハンドリング: カードエラーの場合
+                return redirect()->back()->withErrors(['card_error' => 'カード情報が正しくありません。']);
+            }
+        }
+
+        return $user;
     }
 }

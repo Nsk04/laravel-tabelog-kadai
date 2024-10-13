@@ -45,24 +45,28 @@ Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('re
 Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
 Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
-
 Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index'])->name('restaurants.reviews.index');
 Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
-Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
+
+/* Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show'); */
+
+Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
+    Route::get('reservations/index', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->name('restaurants.reservations.create');
+    Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
+    Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->name('restaurants.reservations.create');
+    Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
+});
 
 
-Route::get('reservations/index', [ReservationController::class, 'index'])->middleware(['auth', 'verified'])->name('reservations.index');
-Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->middleware(['auth', 'verified'])->name('restaurants.reservations.create');
-Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
-Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 Route::get('reservations/complete', [ReservationController::class, 'complete'])->name('reservations.complete');
-Route::get('/', [WebController::class, 'index'])->name('top');
-
 
 Route::resource('companies', CompanyController::class);
 
 Auth::routes(['verify' => true]);
-
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

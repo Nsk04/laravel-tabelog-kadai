@@ -34,12 +34,28 @@ class ReservationController extends Controller
      */
     public function create(Restaurant $restaurant)
     {
-         // 現在時刻を取得
+    
+        // ユーザーがログインしていない場合は、ログインページへリダイレクト
+    if (!Auth::check()) {
+        // 元のURLを保存して、ログイン後にリダイレクトするための設定
+        session(['url.intended' => url()->current()]);
+        return redirect()->route('login');
+    }
+
+    $user = Auth::user();
+
+    // 有料会員であるか、サブスクリプションが有効かを確認
+    if (!$user->subscribed('default') || $user->subscription('default')->cancelled() || $user->subscription('default')->ended()) {
+        return redirect()->route('restaurants.show', $restaurant->id)
+            ->with('error', '予約を行うには有料会員である必要があります。');
+    }
+    
+     // 現在時刻を取得
     $now = Carbon::now();
 
     // 開店時間と閉店時間
-    $openingTime = Carbon::createFromFormat('H:i', $restaurant->open_time);
-    $closingTime = Carbon::createFromFormat('H:i', $restaurant->close_time)->subHours(2); // 閉店2時間前
+    $openingTime = Carbon::createFromFormat('H:i:s', $restaurant->open_time);
+    $closingTime = Carbon::createFromFormat('H:i:s', $restaurant->close_time)->subHours(2); // 閉店2時間前
 
     // minTime は、現在時刻が開店時間を過ぎている場合は現在時刻、そうでなければ開店時間
     $minReservationTime = $now->gt($openingTime) ? $now->format('H:i') : $openingTime->format('H:i');

@@ -75,6 +75,18 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
+         // ログイン状態を確認
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', '予約するにはログインが必要です。');
+    }
+
+    $user = Auth::user();
+
+    // 有料会員かつ、有効期限内かどうかを確認
+    if (!$user->premium_member || ($user->premium_member_expiration && $user->premium_member_expiration->lt(now()))) {
+        return redirect()->route('restaurants.index')->with('error', '有料会員の有効期限が切れています。更新してください。');
+    }
+
         $reviews = $restaurant->reviews()->get();
 
         return view('restaurants.show', compact('restaurant', 'reviews'));
