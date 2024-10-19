@@ -62,6 +62,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
 });
 
+Route::post('/subscription/cancel', [UserController::class, 'cancelSubscription'])->name('subscription.cancel');
+
+
 
 Route::get('reservations/complete', [ReservationController::class, 'complete'])->name('reservations.complete');
 
