@@ -50,23 +50,23 @@ class UserController extends Controller
         $user->update();
 
             // 有料会員登録
-        if ($request->has('premium_member')) {
-            if (!$user->subscribed('default')) {
-                // サブスクリプションを開始（StripeのプランIDを指定）
-                $user->newSubscription('default', 'price_1234567890')  // 'price_1234567890'はStripeのプランID
-                    ->create($request->input('payment_method'));
+    if ($request->has('premium_member')) {
+        if (!$user->subscribed('default')) {
+            // サブスクリプションを開始（StripeのプランIDを指定）
+            $user->newSubscription('default', 'price_1Q7FzQ04OpOW60oOS2kiNCJm')
+            ->create($paymentMethod);
 
-                $user->is_premium = true;  // is_premiumフラグを更新
-            }
-        } else {
-            // 無料会員への変更処理
-            if ($user->subscribed('default')) {
-                // サブスクリプションをキャンセル
-                $user->subscription('default')->cancel();
-            }
-
-            $user->is_premium = false;
+            $user->is_premium = true;  // is_premiumフラグを更新
         }
+    } else {
+        // 無料会員への変更処理
+        if ($user->subscribed('default')) {
+            // サブスクリプションをキャンセル
+            $user->subscription('default')->cancel();
+        }
+
+        $user->is_premium = false;
+    }
 
         $user->save();
 

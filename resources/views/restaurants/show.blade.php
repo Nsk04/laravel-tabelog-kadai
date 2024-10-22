@@ -115,6 +115,7 @@
             @auth
             <div class="row">
                 <div class="offset-md-5 col-md-5">
+                @if(Auth::user()->is_premium)
                     <form method="POST" action="{{ route('reviews.store') }}">
                         @csrf
                         <h4>評価</h4>
@@ -133,9 +134,19 @@
                         <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
                         <button type="submit" class="btn ml=2 btn-info w-50">レビューを追加</button>
                     </form>
+                @else
+                        <!-- 有料会員への誘導 -->
+                        <p class="text-danger">レビューを投稿するには、有料会員になる必要があります。</p>
+                        <a href="{{ route('subscription.create') }}" class="btn btn-secondary">有料会員登録</a>
+                    @endif
+                @endauth
+                @guest
+                    <!-- ログインを促すリンク -->
+                    <a href="{{ route('login') }}" class="btn btn-primary">ログインしてレビューを投稿する</a>
+                @endguest
                 </div>
             </div>
-            @endauth
+            
         </div>
     </div>
 </div>

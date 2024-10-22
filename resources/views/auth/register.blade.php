@@ -85,60 +85,23 @@
                     </div>
                 </div>
 
-                <!-- ここから有料会員チェックボックスとクレジットカード情報を追加 -->
-                <script src="https://js.stripe.com/v3/"></script>
+                <!-- 有料会員チェックボックス -->
+                <div class="form-group">
+                    <label for="premium_member">
+                        <input type="checkbox" id="premium_member" name="premium_member" value="1"> 有料会員になる（月々300円）
+                    </label>
+                </div>
 
-                    <div class="form-group">
-                        <label for="premium_member">
-                            <input type="checkbox" id="premium_member" name="premium_member" value="1"> 有料会員になる（月々300円）
-                        </label>
-                    </div>
+                <!-- 有料会員にチェックされた場合、サブスクリプションページへのリンクを表示 -->
+                <div id="subscription-link" style="display:none;">
+                    <a href="{{ route('subscription.create') }}" class="btn btn-primary">有料会員として登録</a>
+                </div>
 
-                    <div id="credit-card-info" style="display:none;">
-                        <h4>クレジットカード情報</h4>
-                        <div id="card-element"></div> <!-- Stripe Elementsが挿入される場所 -->
-                        <div id="card-errors" role="alert"></div>
-                    </div>
-
-                    <script>
-                        var stripe = Stripe('your_stripe_public_key');
-                        var elements = stripe.elements();
-                        var cardElement = elements.create('card');
-                        cardElement.mount('#card-element');
-
-                        var form = document.querySelector('form');
-                        form.addEventListener('submit', function(event) {
-                            event.preventDefault();
-
-                            if (document.getElementById('premium_member').checked) {
-                                stripe.createPaymentMethod({
-                                    type: 'card',
-                                    card: cardElement,
-                                }).then(function(result) {
-                                    if (result.error) {
-                                        // エラーを表示
-                                        document.getElementById('card-errors').textContent = result.error.message;
-                                    } else {
-                                        // 支払い方法IDをフォームに追加
-                                        var hiddenInput = document.createElement('input');
-                                        hiddenInput.setAttribute('type', 'hidden');
-                                        hiddenInput.setAttribute('name', 'payment_method');
-                                        hiddenInput.setAttribute('value', result.paymentMethod.id);
-                                        form.appendChild(hiddenInput);
-
-                                        // フォームを送信
-                                        form.submit();
-                                    }
-                                });
-                            } else {
-                                form.submit();
-                            }
-                        });
-
-                        document.getElementById('premium_member').addEventListener('change', function() {
-                            var display = this.checked ? 'block' : 'none';
-                            document.getElementById('credit-card-info').style.display = display;
-                        });
+                <script>
+                    document.getElementById('premium_member').addEventListener('change', function() {
+                        var display = this.checked ? 'block' : 'none';
+                        document.getElementById('subscription-link').style.display = display;
+                    });
                 </script>
 
 

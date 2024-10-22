@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\CompanyController;
@@ -39,18 +40,26 @@ Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage/favorite', 'favorite')->name('mypage.favorite');
 });
 
+// レストランの基本表示機能（誰でもアクセス可能）
+Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
+Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
+Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
 Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
 Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
 Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
-Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index'])->name('restaurants.reviews.index');
 Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
+
+Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index'])->name('restaurants.reviews.index');
+
+
+/* Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite'); */
 
 /* Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show'); */
 
-Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
+/* Route::middleware(['auth', 'verified', 'subscribed'])->group(function () { */
     Route::get('reservations/index', [ReservationController::class, 'index'])->name('reservations.index');
     Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->name('restaurants.reservations.create');
     Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
@@ -62,14 +71,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
 });
 
-Route::post('/subscription/cancel', [UserController::class, 'cancelSubscription'])->name('subscription.cancel');
+// サブスクリプション関連のルート
+Route::get('/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
+Route::post('/subscription/store', [SubscriptionController::class, 'store'])->name('subscription.store');
+Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 
 
 
 Route::get('reservations/complete', [ReservationController::class, 'complete'])->name('reservations.complete');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('companies', CompanyController::class);
 
 Auth::routes(['verify' => true]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -87,6 +87,7 @@
                         @enderror
                     </div>
                 </div>
+                <br>
 
                 <div class="form-group">
                     <label for="premium_member">
@@ -94,26 +95,16 @@
                     </label>
                 </div>
 
-                <div id="credit-card-info" style="display: none;">
-                    <h4>クレジットカード情報</h4>
-                    <div class="form-group">
-                        <label for="card_number">カード番号</label>
-                        <input type="text" name="card_number" id="card_number" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="expiry_date">有効期限</label>
-                        <input type="text" name="expiry_date" id="expiry_date" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="cvc">CVC</label>
-                        <input type="text" name="cvc" id="cvc" class="form-control">
-                    </div>
+                <!-- 有料会員にチェックされた場合、サブスクリプションページへのリンクを表示 -->
+                <div id="subscription-link" style="display:none;">
+                    <a href="{{ route('subscription.create') }}" class="btn btn-primary">有料会員にアップグレード</a>
                 </div>
 
+                <!-- クレジットカード情報の表示制御 -->
                 <script>
                     document.getElementById('premium_member').addEventListener('change', function() {
                         var display = this.checked ? 'block' : 'none';
-                        document.getElementById('credit-card-info').style.display = display;
+                        document.getElementById('subscription-link').style.display = display;
                     });
                 </script>
 
