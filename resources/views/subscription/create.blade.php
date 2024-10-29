@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h2>有料会員登録</h2>
+    <h2>有料会員登録(月額300円)</h2>
+    <p>---利用可能サービス---</p>
+    <p>・店舗予約</p>
+    <p>・お気に入り登録</p>
+    <p>・レビューの登録</p>
 
     <!-- Stripeのカード入力フォーム -->
     <form id="payment-form" method="POST" action="{{ route('subscription.store') }}">

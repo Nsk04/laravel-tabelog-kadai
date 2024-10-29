@@ -31,7 +31,6 @@
                                 {{$restaurant->name}}<br>
                                 <label>￥{{$restaurant->lowest_price}}</label>~<label>￥{{$restaurant->highest_price}}</label>
                             </p>
-                            <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-primary">予約する</a>
                         </div>
                     </div>
                 </div>
