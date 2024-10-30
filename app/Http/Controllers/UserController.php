@@ -56,7 +56,7 @@ class UserController extends Controller
             $user->newSubscription('default', 'price_1Q7FzQ04OpOW60oOS2kiNCJm')
             ->create($paymentMethod);
 
-            $user->is_premium = true;  // is_premiumフラグを更新
+            $user->premium_member = true;
         }
     } else {
         // 無料会員への変更処理
@@ -65,7 +65,7 @@ class UserController extends Controller
             $user->subscription('default')->cancel();
         }
 
-        $user->is_premium = false;
+        $user->premium_member = false;
     }
 
         $user->save();
@@ -111,7 +111,7 @@ class UserController extends Controller
 
         if ($user->subscribed('default')) {
             $user->subscription('default')->cancel();
-            $user->is_premium = false;
+            $user->premium_member = false;
             $user->save();
 
             return redirect()->route('mypage')->with('status', 'サブスクリプションをキャンセルしました');

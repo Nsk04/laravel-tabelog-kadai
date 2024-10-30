@@ -45,10 +45,11 @@ class ReservationController extends Controller
     $user = Auth::user();
 
     // 有料会員であるか、サブスクリプションが有効かを確認
-    if (!$user->subscribed('default') || $user->subscription('default')->cancelled() || $user->subscription('default')->ended()) {
+    if (!$user->subscribed('default') || $user->subscription('default')->canceled() || $user->subscription('default')->ended()) {
         return redirect()->route('restaurants.show', $restaurant->id)
             ->with('error', '予約を行うには有料会員である必要があります。');
     }
+    
     
      // 現在時刻を取得
     $now = Carbon::now();

@@ -33,11 +33,11 @@
                 <!-- 予約ボタン -->
                 <div class="mt-4">
                     @auth
-                        @if(Auth::user()->is_premium)
+                        @if(Auth::user()->premium_member)
                             <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-primary">予約する</a>
                         @else
-                            <a href="{{ route('subscription.create') }}" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('upgrade-form').submit();">予約する</a>
-                            <form id="upgrade-form" action="{{ route('subscription.create') }}" method="GET" style="display: none;">
+                            <a href="{{ route('subscription.create') }}" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('upgrade-form-reservation').submit();">予約する</a>
+                            <form id="upgrade-form-reservation" action="{{ route('subscription.create') }}" method="GET" style="display: none;">
                                 @csrf
                             </form>
                         @endif
@@ -52,7 +52,7 @@
                 <form method="POST" action="{{ route('restaurants.favorite', $restaurant) }}">
                     @csrf
                     @auth
-                        @if(Auth::user()->is_premium)
+                        @if(Auth::user()->premium_member)
                             @if($restaurant->isFavoritedBy(Auth::user()))
                                 <button type="submit" class="btn kadai_002-favorite-button text-favorite w-100">
                                     <i class="fa fa-heart"></i> お気に入り解除
@@ -63,9 +63,12 @@
                                 </button>
                             @endif
                         @else
-                            <a href="{{ route('subscription.create') }}" class="btn kadai_002-favorite-button text-favorite w-100" onclick="event.preventDefault(); document.getElementById('upgrade-form').submit();">
+                            <a href="{{ route('subscription.create') }}" class="btn kadai_002-favorite-button text-favorite w-100" onclick="event.preventDefault(); document.getElementById('upgrade-form-favorite').submit();">
                                 <i class="fa fa-heart"></i> お気に入り
                             </a>
+                            <form id="upgrade-form-favorite" action="{{ route('subscription.create') }}" method="GET" style="display: none;">
+                                @csrf
+                            </form>
                         @endif
                     @else
                         <a href="{{ route('login') }}" class="btn btn-primary">ログインしてお気に入りに追加</a>
@@ -103,7 +106,7 @@
             <div class="row mt-4">
                 <div class="col-md-10 offset-md-1">
                     @auth
-                        @if(Auth::user()->is_premium)
+                        @if(Auth::user()->premium_member)
                             <form method="POST" action="{{ route('reviews.store') }}">
                                 @csrf
                                 <h4>評価</h4>
@@ -123,7 +126,10 @@
                                 <button type="submit" class="btn btn-info w-50">レビューを追加</button>
                             </form>
                         @else
-                            <a href="{{ route('subscription.create') }}" class="btn btn-info w-50" onclick="event.preventDefault(); document.getElementById('upgrade-form').submit();">レビューを追加</a>
+                            <a href="{{ route('subscription.create') }}" class="btn btn-info w-50" onclick="event.preventDefault(); document.getElementById('upgrade-form-review').submit();">レビューを追加</a>
+                            <form id="upgrade-form-review" action="{{ route('subscription.create') }}" method="GET" style="display: none;">
+                                @csrf
+                            </form>
                         @endif
                     @else
                         <a href="{{ route('login') }}" class="btn btn-primary">ログインしてレビューを追加する</a>

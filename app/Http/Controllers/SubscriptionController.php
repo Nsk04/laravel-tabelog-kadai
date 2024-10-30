@@ -24,8 +24,11 @@ class SubscriptionController extends Controller
         $priceId = 'price_1Q7FzQ04OpOW60oOS2kiNCJm'; 
 
         // サブスクリプションを作成
-        $user->newSubscription('default', $priceId)
-            ->create($paymentMethod);
+        $user->newSubscription('default', $priceId)->create($paymentMethod);
+
+         // 有料会員フラグを設定
+        $user->is_premium = true;
+        $user->save();
 
         // サブスクリプションが作成されたら、完了ページへリダイレクト
         return redirect()->route('home')->with('success', '有料会員に登録されました。');
@@ -34,10 +37,16 @@ class SubscriptionController extends Controller
     public function cancel()
     {
         $user = Auth::user();
+        $subscription = $user->subscription('default');
 
-        // サブスクリプションをキャンセル
-        $user->subscription('default')->cancel();
+        // サブスクリプションが存在し、かつアクティブな場合のみキャンセルを実行
+        if ($subscription && ($subscription->active() || $subscription->onGracePeriod())) {
+            $subscription->cancel();
 
-        return redirect()->route('mypage')->with('success', '有料会員を解約しました。');
+            return redirect()->route('mypage')->with('success', '有料会員を解約しました。');
+        } else {
+            return redirect()->route('mypage')->with('error', '解約できるサブスクリプションが存在しません。');
+        }
     }
+
 }

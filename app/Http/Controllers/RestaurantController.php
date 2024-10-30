@@ -37,9 +37,20 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+         // ログインしていなければログイン画面へリダイレクト
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', '予約するにはログインが必要です。');
+    }
 
-        return view('restaurants.create', compact('categories'));
+    // ユーザー情報の取得
+    $user = Auth::user();
+
+    // 有料会員かつ有効期限内かどうかを確認
+    if (!$user->premium_member || ($user->premium_member_expiration && $user->premium_member_expiration->lt(now()))) {
+        return redirect()->route('restaurants.index')->with('error', '予約機能は有料会員限定です。会員登録または更新を行ってください。');
+    }
+
+    return view('reservations.create', compact('restaurant'));
     }
 
     /**
@@ -50,6 +61,19 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
+        // ログインしていなければログイン画面へリダイレクト
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', '予約するにはログインが必要です。');
+    }
+
+    // ユーザー情報の取得
+    $user = Auth::user();
+
+    // 有料会員かつ有効期限内かどうかを確認
+    if (!$user->premium_member || ($user->premium_member_expiration && $user->premium_member_expiration->lt(now()))) {
+        return redirect()->route('restaurants.index')->with('error', '予約機能は有料会員限定です。会員登録または更新を行ってください。');
+    }
+
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
         $restaurant->description = $request->input('description');
@@ -64,7 +88,7 @@ class RestaurantController extends Controller
         $restaurant->category_id = $request->input('category_id');
         $restaurant->save();
 
-        return to_route('restaurants.index');
+        return redirect()->route('reservations.complete')->with('success', '予約が完了しました。');
     }
 
     /**
@@ -75,21 +99,10 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-         // ログイン状態を確認
-    if (!Auth::check()) {
-        return redirect()->route('login')->with('error', '予約するにはログインが必要です。');
-    }
+     // 店舗情報の表示（ログイン不要）
+    $reviews = $restaurant->reviews()->get();
 
-    $user = Auth::user();
-
-    // 有料会員かつ、有効期限内かどうかを確認
-    if (!$user->premium_member || ($user->premium_member_expiration && $user->premium_member_expiration->lt(now()))) {
-        return redirect()->route('restaurants.index')->with('error', '有料会員の有効期限が切れています。更新してください。');
-    }
-
-        $reviews = $restaurant->reviews()->get();
-
-        return view('restaurants.show', compact('restaurant', 'reviews'));
+    return view('restaurants.show', compact('restaurant', 'reviews'));
     }
 
     /**
