@@ -87,16 +87,16 @@
                             <label for="user-name">有料会員ステータス</label>
                             <p>現在の会員ステータスを確認できます</p>
 
-                            @if($user->subscribed('default'))
-                                <!-- 有料会員の場合、解約ボタンを表示 -->
+                            @if($user->subscribed('default') && !$user->subscription('default')->ended())
+                                <!-- サブスクリプションがアクティブな場合、有料会員向けのボタンやメッセージを表示 -->
                                 <form action="{{ route('subscription.cancel') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger">有料会員を解約する</button>
                                 </form>
                             @else
+                                <!-- サブスクリプションがキャンセル済みまたは無効な場合 -->
                                 <p>現在無料会員です。</p>
                             @endif
-                        </div>
                     </div>
                 </div>
             </div>
