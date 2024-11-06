@@ -29,11 +29,11 @@
         </div>
         <div class="form-group">
             <label for="restaurant-name">営業開始時間</label>
-            <input type="time" name="opne_time" id="restaurant-open_time" class="form-control" value="{{ $restaurant->open_time }}">
+            <input type="time" name="open_time" id="restaurant-open_time" class="form-control" value="{{ $restaurant->open_time }}">
         </div>
         <div class="form-group">
             <label for="restaurant-name">営業終了時間</label>
-            <input type="time" name="name" id="restaurant-close_time" class="form-control" value="{{ $restaurant->close_time }}">
+            <input type="time" name="close_time" id="restaurant-close_time" class="form-control" value="{{ $restaurant->close_time }}">
         </div>
         <div class="form-group">
             <label for="restaurant-name">定休日</label>

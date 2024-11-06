@@ -50,7 +50,10 @@ class RestaurantController extends Controller
         return redirect()->route('restaurants.index')->with('error', '予約機能は有料会員限定です。会員登録または更新を行ってください。');
     }
 
-    return view('reservations.create', compact('restaurant'));
+     // カテゴリ情報を取得
+    $categories = Category::all();
+
+    return view('restaurants.create', compact('categories'));
     }
 
     /**
@@ -88,7 +91,7 @@ class RestaurantController extends Controller
         $restaurant->category_id = $request->input('category_id');
         $restaurant->save();
 
-        return redirect()->route('reservations.complete')->with('success', '予約が完了しました。');
+        return redirect()->route('restaurants.index')->with('success', '店舗が登録されました。');
     }
 
     /**
@@ -127,7 +130,21 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
-        
+         // 必須フィールドにバリデーションを追加
+        $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'lowest_price' => 'nullable|integer',
+        'highest_price' => 'nullable|integer',
+        'phone_number' => 'nullable|string|max:20',
+        'open_time' => 'required', // 必須
+        'close_time' => 'required', // 必須
+        'closed_day' => 'nullable|string',
+        'post_code' => 'nullable|string|max:10',
+        'address' => 'nullable|string',
+        'category_id' => 'nullable|exists:categories,id'
+        ]);
+
         $restaurant->name = $request->input('name');
         $restaurant->description = $request->input('description');
         $restaurant->lowest_price = $request->input('lowest_price');
@@ -135,7 +152,7 @@ class RestaurantController extends Controller
         $restaurant->phone_number = $request->input('phone_number');
         $restaurant->open_time = $request->input('open_time');
         $restaurant->close_time = $request->input('close_time');
-        $restaurant->closed_day = $request->input('closed_time');
+        $restaurant->closed_day = $request->input('closed_day');
         $restaurant->post_code = $request->input('post_code');
         $restaurant->address = $request->input('address');
         $restaurant->category_id = $request->input('category_id');

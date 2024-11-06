@@ -30,10 +30,6 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->subscribed('default')) {
-            return redirect()->route('restaurants.index')->with('error', '有料会員のみレビューを投稿できます。');
-        }
-
         $request->validate([
             'content' => 'required'
     ]);
@@ -56,9 +52,6 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        if (!Auth::user()->subscribed('default')) {
-            return redirect()->route('restaurants.index')->with('error', '有料会員のみレビューを編集できます。');
-        }
 
         if ($review->user_id !== Auth::id()) {
             return redirect()->route('restaurants.show', $review->restaurant_id)->with('error', '権限がありません。');
@@ -77,10 +70,6 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        if (!Auth::user()->subscribed('default')) {
-            return redirect()->route('restaurants.index')->with('error', '有料会員のみレビューを更新できます。');
-        }
-
         $request->validate([
             'content' => 'required',
             'score' => 'required|integer|min:1|max:5',
@@ -106,10 +95,6 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        if (!Auth::user()->subscribed('default')) {
-            return redirect()->route('restaurants.index')->with('error', '有料会員のみレビューを削除できます。');
-        }
-        
         if ($review->user_id !== Auth::id()) {
             return redirect()->route('restaurants.show', $review->restaurant_id)->with('error', '権限がありません。');
         }

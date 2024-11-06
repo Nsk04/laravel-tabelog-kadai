@@ -45,14 +45,14 @@ Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restau
 Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
 Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
-Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
-Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
-Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
-Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+    Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+    Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
-Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
+    Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
 
-Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index'])->name('restaurants.reviews.index');
+    Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index'])->name('restaurants.reviews.index');
 
 
 /* Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite'); */
@@ -64,6 +64,7 @@ Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index
     Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->name('restaurants.reservations.create');
     Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
     Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+    Route::get('reservations/complete', [ReservationController::class, 'complete'])->name('reservations.complete');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -77,8 +78,6 @@ Route::post('/subscription/store', [SubscriptionController::class, 'store'])->na
 Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 
 
-
-Route::get('reservations/complete', [ReservationController::class, 'complete'])->name('reservations.complete');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('companies', CompanyController::class);

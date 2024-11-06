@@ -91,14 +91,23 @@ label {
   color: #191919;
 }
 
+/* headerとfooterの背景色 */
+.navbar-light{
+  background-color: #ffffff !important;
+}
+
+.navbar-light.bg-white {
+  background-color: #ffffff !important;
+}
+
 .header-logo {
-  width: 100px; /* 画像の幅を指定 */
-  height: auto; /* 高さを自動調整 */
+  width: 100px;
+  height: auto;
 }
 
 .footer-logo {
-  width: 100px; /* 画像の幅を指定 */
-  height: auto; /* 高さを自動調整 */
+  width: 100px;
+  height: auto; 
 }
 
 .kadai_002-favorite-button {

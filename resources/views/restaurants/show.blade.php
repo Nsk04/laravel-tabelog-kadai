@@ -42,7 +42,7 @@
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary">ログインして予約する</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary">予約する</a>
                     @endauth
                 </div>
             </div>
@@ -71,7 +71,7 @@
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary">ログインしてお気に入りに追加</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary">お気に入り</a>
                     @endauth
                 </form>
             </div>
@@ -132,7 +132,7 @@
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary">ログインしてレビューを追加する</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary">レビューを追加</a>
                     @endauth
                 </div>
             </div>
