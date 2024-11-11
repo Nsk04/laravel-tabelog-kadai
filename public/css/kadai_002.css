@@ -92,22 +92,22 @@ label {
 }
 
 /* headerとfooterの背景色 */
-.navbar-light{
+.kadai_002-header-container{
   background-color: #ffffff !important;
 }
 
-.navbar-light.bg-white {
+.kadai_002-footer-container {
   background-color: #ffffff !important;
 }
 
 .header-logo {
   width: 100px;
-  height: auto;
+  height: 50px;
 }
 
 .footer-logo {
   width: 100px;
-  height: auto; 
+  height: 50px; 
 }
 
 .kadai_002-favorite-button {

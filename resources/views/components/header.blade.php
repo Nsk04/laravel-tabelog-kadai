@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm kadai_002-header-container">
+<nav class="navbar navbar-expand-md navbar-light shadow-sm kadai_002-header-container fixed-top">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
       <img src="{{asset('img/logo.jpg')}}" class="header-logo">
