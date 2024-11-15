@@ -35,11 +35,13 @@ class SubscriptionController extends Controller
     }
 
     public function cancel()
-{
-    $user = Auth::user();
-    $subscription = $user->subscription('default');
+    {
+        $user = Auth::user();
+        $subscription = $user->subscription('default');
+        /*  ddd($subscription); */
 
     if ($subscription && ($subscription->active() || $subscription->onGracePeriod())) {
+       /*  ddd($subscription->cancellation_details); */
         $subscription->cancel();
 
         // サブスクリプション状態の最新情報を反映

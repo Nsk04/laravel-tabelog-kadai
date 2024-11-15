@@ -40,9 +40,6 @@ Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage/favorite', 'favorite')->name('mypage.favorite');
 });
 
-// レストランの基本表示機能（誰でもアクセス可能）
-Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
-Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
 Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
     Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');

@@ -46,7 +46,7 @@ class ReservationController extends Controller
 
     // 有料会員であるか、サブスクリプションが有効かを確認
     if (!$user->subscribed('default') || $user->subscription('default')->canceled() || $user->subscription('default')->ended()) {
-        return redirect()->route('restaurants.show', $restaurant->id)
+        return redirect()->route('subscription.create')
             ->with('error', '予約を行うには有料会員である必要があります。');
     }
     

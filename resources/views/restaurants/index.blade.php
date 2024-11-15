@@ -9,6 +9,12 @@
     </div>
     <div class="col-9">
     <div class="container">
+            <!-- エラーメッセージの表示 -->
+            @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             @if ($category !== null)
                 <a href="{{ route('restaurants.index') }}">トップ</a> > {{ $category->name }}
                 <h1>{{ $category->name }}の店舗一覧{{$total_count}}件</h1>
