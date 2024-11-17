@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <h2>有料会員登録(月額300円)</h2>
     <p>---利用可能サービス---</p>
     <p>・店舗予約</p>

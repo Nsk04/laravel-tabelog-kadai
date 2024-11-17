@@ -23,14 +23,14 @@
 </head>
 <body>
     <div id="app">
-    
-    @component('components.header')
-    @endcomponent
+
 
     <main class="py-4 mb-5">
         @yield('content')
     </main>
 
+    @component('components.header')
+    @endcomponent
     @component('components.footer')
     @endcomponent
 

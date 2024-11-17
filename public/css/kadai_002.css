@@ -66,6 +66,7 @@ body {
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
+  padding-top: 80px;
   line-height: normal;
   letter-spacing: 0.11px;
 }
@@ -91,20 +92,31 @@ label {
   color: #191919;
 }
 
-.error-message {
-  color: #D8000C;
-  background-color: #FFBABA;
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
   padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #D8000C;
   border-radius: 4px;
-  font-weight: bold;
+  margin-bottom: 15px;
 }
 
+.alert-success {
+  background-color: #cfd43f;
+  color: #3939db;
+  border: 1px solid #cfd43f;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
 
 /* headerとfooterの背景色 */
 .kadai_002-header-container{
-  background-color: #ffffff !important;
+  height: 80px; /* ヘッダーの高さを明示 */
+    background-color: #ffffff !important; /* 背景色の適用 */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* ヘッダー下の影を追加 */
+    z-index: 1030; /* Bootstrapの固定位置ヘッダーに合わせたz-index */
 }
 
 .kadai_002-footer-container {
