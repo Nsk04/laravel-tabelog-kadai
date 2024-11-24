@@ -34,6 +34,9 @@ class SubscriptionController extends Controller
         return redirect()->route('home')->with('success', '有料会員に登録されました。');
     }
 
+    public function edit()
+    {}
+
     public function cancel()
     {
         $user = Auth::user();

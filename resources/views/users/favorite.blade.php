@@ -12,7 +12,11 @@
             <div class="col-md-7 mt-2">
                 <div class="d-inline-flex">
                     <a href="{{route('restaurants.show', $fav->favoriteable_id)}}" class="w-25">
-                        <img src="{{ asset('img/dummy.png')}}" class="img-fluid w-100">
+                        @if (App\Models\Restaurant::find($fav->favoriteable_id)->image !== "")
+                        <img src="{{ asset(App\Models\Restaurant::find($fav->favoriteable_id)->image) }}" class="img-fluid w-100">
+                        @else
+                        <img src="{{ asset('img/dummy.png') }}" class="img-fluid w-100">
+                        @endif
                     </a>
                     <div class="container mt-3">
                         <h5 class="w-100 kadai_002-favorite-item-text">{{App\Models\Restaurant::find($fav->favoriteable_id)->name}}</h5>

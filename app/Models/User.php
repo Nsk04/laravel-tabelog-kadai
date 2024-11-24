@@ -11,10 +11,13 @@ use App\Notifications\CustomVerifyEmail;
 use App\Notifications\CustomResetPassword;
 use Overtrue\LaravelFavorite\Traits\Favoriter;
 use Laravel\Cashier\Billable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, Favoriter,Billable;
+    use HasApiTokens, HasFactory, Notifiable, Favoriter, Billable, SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     public function sendEmailVerificationNotification()
     {

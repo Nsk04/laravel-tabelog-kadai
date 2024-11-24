@@ -92,7 +92,6 @@ label {
   color: #191919;
 }
 
-
 .alert-danger {
   background-color: #f8d7da;
   color: #721c24;
@@ -149,4 +148,10 @@ label {
 
 .review-score-color:focus {
   color: #0fbe9f;
+}
+
+.kadai_002-delete-submit-button {
+  border-radius: 2px;
+  color: #ffffff;
+  background-color: #d94b0e;
 }

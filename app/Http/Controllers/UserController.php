@@ -119,4 +119,10 @@ class UserController extends Controller
 
         return redirect()->route('mypage')->with('error', 'サブスクリプションが存在しません');
     }
+
+    public function destroy(Request $request)
+    {
+        Auth::user()->delete();
+        return redirect('/');
+    }
 }
