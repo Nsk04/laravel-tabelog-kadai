@@ -35,7 +35,26 @@ class SubscriptionController extends Controller
     }
 
     public function edit()
-    {}
+    {
+        $intent = Auth::user()->createSetupIntent();
+        return view('subscription.edit', ['intent' => $intent]);
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+        $paymentMethod = $request->payment_method;
+
+        try {
+            // ユーザーの支払い方法を更新
+            $user->updateDefaultPaymentMethod($paymentMethod);
+
+        return redirect()->route('subscription.edit')->with('success', 'カード情報を更新しました。');
+        } catch (\Exception $e) {
+        return redirect()->route('subscription.edit')->with('error', 'カード情報の更新に失敗しました。');
+        }
+    }
+
 
     public function cancel()
     {

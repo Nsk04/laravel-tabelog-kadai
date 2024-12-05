@@ -1,16 +1,27 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm kadai_002-header-containers fixed-top">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm kadai_002-header-containers fixed-top">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
       <img src="{{asset('img/logo.jpg')}}" class="header-logo">
     </a>
-    <form class="row g-1">
+<!--     <form class="row g-1">
       <div class="col-auto">
         <input class="form-control kadai_002-header-search-input">
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn kadai_002-header-search-button"><i class="fas fa-search samuraimart-header-search-icon"></i></button>
+        <button type="submit" class="btn kadai_002-header-search-button"><i class="fas fa-search kadai_002-header-search-icon"></i></button>
+      </div>
+    </form> -->
+    <form action="{{ route('search') }}" method="GET" class="row g-1">
+      <div class="col-auto">
+          <input type="text" name="query" class="form-control" placeholder="検索キーワードを入力" value="{{ request('query') }}">
+      </div>
+      <div class="col-auto">
+          <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+          </button>
       </div>
     </form>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
       <span class="navbar-toggler-icon"></span>
     </button>

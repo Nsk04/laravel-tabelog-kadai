@@ -7,6 +7,11 @@
         @component('components.sidebar', ['categories' => $categories])
         @endcomponent
     </div>
+    <form action="{{ route('search') }}" method="GET" class="d-flex justify-content-center">
+    <input type="text" name="query" value="{{ request('query') }}" class="form-control w-50" placeholder="レストラン名を入力">
+    <button type="submit" class="btn btn-primary ml-2">検索</button>
+</form>
+
     <div class="col-9">
         <h1>店舗</h1>
         <div class="row">

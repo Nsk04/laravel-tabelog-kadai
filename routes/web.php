@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\SearchController;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +31,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
 Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->name('mypage');
@@ -74,6 +77,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
 Route::post('/subscription/store', [SubscriptionController::class, 'store'])->name('subscription.store');
 Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
+Route::get('/subscription/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit');
+Route::post('/subscription/update', [SubscriptionController::class, 'update'])->name('subscription.update');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
