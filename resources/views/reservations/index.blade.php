@@ -73,7 +73,7 @@
                                         <form method="POST" action="{{ route('reservations.destroy' , $reservation->id)}}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-info" onclick="return confirm('本当に実行しますか?');">キャンセル</button>
+                                            <button type="submit" class="btn btn-success" onclick="return confirm('本当に実行しますか?');">キャンセル</button>
                                         </form>
                                     @endif
                                 </td>

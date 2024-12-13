@@ -11,7 +11,7 @@
         <button type="submit" class="btn kadai_002-header-search-button"><i class="fas fa-search kadai_002-header-search-icon"></i></button>
       </div>
     </form> -->
-    <form action="{{ route('search') }}" method="GET" class="row g-1">
+<!--     <form action="{{ route('search') }}" method="GET" class="row g-1">
       <div class="col-auto">
           <input type="text" name="query" class="form-control" placeholder="検索キーワードを入力" value="{{ request('query') }}">
       </div>
@@ -20,7 +20,7 @@
               <i class="fas fa-search"></i>
           </button>
       </div>
-    </form>
+    </form> -->
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
       <span class="navbar-toggler-icon"></span>

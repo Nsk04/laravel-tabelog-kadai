@@ -16,6 +16,38 @@ class RestaurantController extends Controller
      */
     public function index(Request $request)
     {
+        $categories = Category::all(); // 全カテゴリ取得
+        $query = $request->input('query'); // 検索キーワード
+        $categoryId = $request->input('category'); // カテゴリID
+    
+        // 検索条件を元にクエリを構築
+        $restaurants = Restaurant::query();
+    
+        if (!empty($query) || !empty($categoryId)) {
+            $restaurants->where(function ($q) use ($query, $categoryId) {
+                if (!empty($query)) {
+                    $q->where('name', 'LIKE', "%{$query}%");
+                }
+                if (!empty($categoryId)) {
+                    $q->orWhere('category_id', $categoryId);
+                }
+            });
+        }
+    
+        $restaurants = $restaurants->sortable()->paginate(15); // ページネーション
+        $total_count = $restaurants->total(); // 検索結果件数
+    
+        // 現在のカテゴリ情報を取得 (必要に応じて)
+        $category = $categoryId ? Category::find($categoryId) : null;
+    
+        return view('restaurants.index', compact(
+            'restaurants', 'categories', 'query', 'category', 'total_count'
+        ));
+    }
+    
+        
+    /*  public function index(Request $request)
+    {
         $categories = Category::all();
         if ($request->category !== null) {
             $restaurants = Restaurant::where('category_id', $request->category)->sortable()->paginate(15);
@@ -28,7 +60,7 @@ class RestaurantController extends Controller
         }
 
         return view('restaurants.index', compact('restaurants', 'category', 'categories', 'total_count'));
-    }
+    } */
 
     /**
      * Show the form for creating a new resource.

@@ -40,13 +40,13 @@
                         @if(Auth::user()->premium_member)
                             <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-primary">予約する</a>
                         @else
-                            <a href="{{ route('subscription.create') }}" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('upgrade-form-reservation').submit();">予約する</a>
+                            <a href="{{ route('subscription.create') }}" class="btn btn-outline-success" onclick="event.preventDefault(); document.getElementById('upgrade-form-reservation').submit();">予約する</a>
                             <form id="upgrade-form-reservation" action="{{ route('subscription.create') }}" method="GET" style="display: none;">
                                 @csrf
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary">予約する</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-success">予約する</a>
                     @endauth
                 </div>
             </div>
@@ -75,7 +75,7 @@
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary">お気に入り</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-success">お気に入り</a>
                     @endauth
                 </form>
             </div>
@@ -136,7 +136,7 @@
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary">レビューを追加</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-success">レビューを追加</a>
                     @endauth
                 </div>
             </div>
