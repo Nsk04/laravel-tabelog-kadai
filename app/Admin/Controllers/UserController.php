@@ -123,6 +123,7 @@ class UserController extends AdminController
         $form->text('pm_last_four', __('Pm last four'));
         $form->datetime('trial_ends_at', __('Trial ends at'))->default(date('Y-m-d H:i:s'));
         $form->datetime('deleted_at', __('Deleted at'))->default(NULL);
+        
         $form->saving(function (Form $form) {
             if ($form->password && $form->model()->password != $form->password) {
                 $form->password = bcrypt($form->password);

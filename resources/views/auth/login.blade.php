@@ -11,7 +11,7 @@
                 @csrf
 
                 <div class="form-group">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror samuraimart-login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="メールアドレス">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror kadai_002-login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="メールアドレス">
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror samuraimart-login-input" name="password" required autocomplete="current-password" placeholder="パスワード">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror kadai_002-login-input" name="password" required autocomplete="current-password" placeholder="パスワード">
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -34,18 +34,18 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                        <label class="form-check-label samuraimart-check-label w-100" for="remember">
+                        <label class="form-check-label kadai_002-check-label w-100" for="remember">
                             次回から自動的にログインする
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="mt-3 btn samuraimart-submit-button w-100">
+                    <button type="submit" class="mt-3 btn kadai_002-submit-button w-100">
                         ログイン
                     </button>
 
-                    <a class="btn btn-link mt-3 d-flex justify-content-center samuraimart-login-text" href="{{ route('password.request') }}">
+                    <a class="btn btn-link mt-3 d-flex justify-content-center kadai_002-login-text" href="{{ route('password.request') }}">
                         パスワードをお忘れの場合
                     </a>
                 </div>
@@ -54,7 +54,7 @@
             <hr>
 
             <div class="form-group">
-                <a class="btn btn-link mt-3 d-flex justify-content-center samuraimart-login-text" href="{{ route('register') }}">
+                <a class="btn btn-link mt-3 d-flex justify-content-center kadai_002-login-text" href="{{ route('register') }}">
                     新規登録
                 </a>
             </div>

@@ -113,6 +113,7 @@
                     保存
                 </button>
             </form>
+            
             <hr>
             <div class="d-flex justify-content-start">
                 <form method="POST" action="{{ route('mypage.destroy') }}">
@@ -134,7 +135,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn dashboard-delete-link" data-bs-dismiss="modal">キャンセル</button>
-                                    <button type="submit" class="btn samuraimart-delete-submit-button">退会する</button>
+                                    <button type="submit" class="btn kadai_002-delete-submit-button">退会する</button>
                                 </div>
                             </div>
                         </div>

@@ -26,6 +26,42 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label for="post_code" class="col-md-5 col-form-label text-md-left">郵便番号<span class="text-danger">*</span></label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control @error('postal_code') is-invalid @enderror kadai_002-login-input" name="postal_code" required placeholder="150-0043">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="address" class="col-md-5 col-form-label text-md-left">住所<span class="text-danger">*</span></label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control @error('address') is-invalid @enderror kadai_002-login-input" name="address" required placeholder="東京都渋谷区道玄坂２丁目１１−１">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="phone_number" class="col-md-5 col-form-label text-md-left">電話番号<span class="text-danger">*</span></label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror kadai_002-login-input" name="phone" required placeholder="03-5790-9039">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="password" class="col-md-5 col-form-label text-md-left">パスワード<span class="text-danger">*</span></label>
+
+                    <div class="col-md-8">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror kadai_002-login-input" name="password" required autocomplete="new-password">
+
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
+
                 <!-- 有料会員チェックボックス -->
                 <div class="form-group row">
                     <div class="col-md-12">
