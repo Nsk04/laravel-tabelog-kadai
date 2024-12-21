@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="top-page-container" style="background-image: url('{{ asset('img/background.jpg') }}');">
+<div class="top-page-container">
     <div class="overlay">
         <div class="search-container text-center">
             <h1 class="search-title">お店を探す</h1>
@@ -22,7 +22,7 @@
 <br>
 <br>
 <div class="container mt-5">
-    <h2 class="mb-4">店舗</h2>
+    <h2 class="restaurant-top text-center">店舗</h2>
     <div class="row">
         @foreach($restaurants as $restaurant)
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
