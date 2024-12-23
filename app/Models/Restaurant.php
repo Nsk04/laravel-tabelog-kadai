@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Kyslik\ColumnSortable\Sortable;
+use Carbon\Carbon;
 
 class Restaurant extends Model
 {
@@ -19,5 +20,15 @@ class Restaurant extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function getFormattedOpenTimeAttribute()
+    {
+        return Carbon::parse($this->attributes['open_time'])->format('H:i');
+    }
+
+    public function getFormattedCloseTimeAttribute()
+    {
+        return Carbon::parse($this->attributes['close_time'])->format('H:i');
     }
 }

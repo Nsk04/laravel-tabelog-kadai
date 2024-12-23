@@ -25,7 +25,7 @@
                 <p class="">{{ $restaurant->phone_number }}</p>
                 <hr>
                 <b>営業時間</b>
-                <p class="">{{ date('H:i', strtotime($restaurant->open_time)) }}~{{ date('H:i', strtotime($restaurant->close_time)) }}</p>
+                <p class="">{{ $restaurant->formatted_open_time }}~{{ $restaurant->formatted_close_time }}</p>
                 <hr>
                 <b>定休日</b>
                 <p class="">{{ $restaurant->closed_day }}</p>
