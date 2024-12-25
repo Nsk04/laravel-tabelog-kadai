@@ -18,7 +18,7 @@
                 メール本文内のURLをクリックすると本会員登録が完了となります。  
             </p>
             <div class="text-center">
-                <a href="{{ url('/') }}" class="btn nagoyameshi-submit-button w-50 text-white">トップページへ</a>
+                <a href="{{ url('/') }}" class="btn kadai_002-submit-button w-50 text-white">トップページへ</a>
             </div>
         </div>
     </div>

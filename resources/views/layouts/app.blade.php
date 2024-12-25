@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -15,26 +16,20 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="https://kit.fontawesome.com/aca0c0e746.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/kadai_002.css') }}" rel="stylesheet">
-    @stack('styles')
+    <script src="https://kit.fontawesome.com/aca0c0e746.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
-
-    <main class="py-4 mb-5">
-        @yield('content')
-    </main>
-
     @component('components.header')
     @endcomponent
-    @component('components.footer')
-    @endcomponent
-
-        
+        <main class="py-4 mb-5">
+            @yield('content')
+        </main>
+        @component('components.footer')
+        @endcomponent
     </div>
-    @stack('scripts')
 </body>
 </html>

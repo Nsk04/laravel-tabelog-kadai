@@ -83,4 +83,4 @@ Route::post('/subscription/update', [SubscriptionController::class, 'update'])->
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes(['verify' => true, 'register' => true]);
+Auth::routes(['verify' => true]);

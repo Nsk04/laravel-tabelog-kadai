@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: YuGo;
   src: local(YuGo-Medium),
     url(/path/to/YuGo-Medium.woff2) format("woff2"),
@@ -18,7 +18,7 @@
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-}
+} */
 
 h1 {
   font-family: YuGo;
