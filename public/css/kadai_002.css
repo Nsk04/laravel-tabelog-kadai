@@ -124,13 +124,13 @@ label {
 }
 
 .header-logo {
-  width: 100px;
-  height: 50px;
+  width: 150px;
+  height: auto;
 }
 
 .footer-logo {
-  width: 100px;
-  height: 50px; 
+  width: 150px;
+  height: auto; 
 }
 
 .kadai_002-favorite-button {
@@ -157,3 +157,14 @@ label {
   background-color: #d94b0e;
 }
 
+.restaurant-card > a {
+  display: block;
+  aspect-ratio: 4 / 3;
+}
+
+.restaurant-card > a > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
