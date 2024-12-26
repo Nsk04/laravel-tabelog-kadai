@@ -57,7 +57,7 @@
                             @if ($restaurant->image !== "")
                                 <img src="{{ asset($restaurant->image) }}" alt="{{ $restaurant->name }}" class="img-thumbnail">
                             @else
-                                <img src="{{ asset('img/korea.png')}}" alt="画像" class="img-select">
+                                <img src="{{ asset('img/korea.png')}}" alt="デフォルト画像" class="img-thumbnail">
                             @endif
                         </a>
                         <div class="details mt-2">
