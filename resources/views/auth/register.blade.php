@@ -24,6 +24,8 @@
                     </div>
                 </div>
 
+                <hr>
+
                 <div class="form-group row">
                     <label for="email" class="col-md-5 col-form-label text-md-left">メールアドレス<span class="ml-1 kadai_002-require-input-label"><span class="kadai_002-require-input-label-text">必須</span></span></label>
 
@@ -38,6 +40,8 @@
                     </div>
                 </div>
 
+                <hr>
+
                 <div class="form-group row">
                     <label for="post_code" class="col-md-5 col-form-label text-md-left">郵便番号<span class="ml-1 kadai_002-require-input-label"><span class="kadai_002-require-input-label-text">必須</span></span></label>
 
@@ -45,6 +49,8 @@
                         <input type="text" class="form-control @error('post_code') is-invalid @enderror kadai_002-login-input" name="post_code"  id="post_code" required placeholder="150-0043">
                     </div>
                 </div>
+
+                <hr>
 
                 <div class="form-group row">
                     <label for="address" class="col-md-5 col-form-label text-md-left">住所<span class="ml-1 kadai_002-require-input-label"><span class="kadai_002-require-input-label-text">必須</span></span></label>
@@ -54,6 +60,8 @@
                     </div>
                 </div>
 
+                <hr>
+
                 <div class="form-group row">
                     <label for="phone_number" class="col-md-5 col-form-label text-md-left">電話番号<span class="ml-1 kadai_002-require-input-label"><span class="kadai_002-require-input-label-text">必須</span></span></label>
 
@@ -61,6 +69,8 @@
                         <input type="text" class="form-control @error('phone_number') is-invalid @enderror kadai_002-login-input" name="phone_number" id="phone_number" required placeholder="03-5790-9039">
                     </div>
                 </div>
+
+                <hr>
 
                 <div class="form-group row">
                     <label for="password" class="col-md-5 col-form-label text-md-left">パスワード<span class="ml-1 kadai_002-require-input-label"><span class="kadai_002-require-input-label-text">必須</span></span></label>
@@ -76,6 +86,7 @@
                     </div>
                 </div>
 
+
                 <div class="form-group row">
                     <label for="password-confirm" class="col-md-5 col-form-label text-md-left"></label>
 
@@ -83,6 +94,8 @@
                         <input id="password-confirm" type="password" class="form-control kadai_002-login-input" name="password_confirmation" required autocomplete="new-password">
                     </div>
                 </div>
+
+                <hr>
 
                 <div class="form-group">
                     <button type="submit" class="btn kadai_002-submit-button w-100">
