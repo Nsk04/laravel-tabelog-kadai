@@ -53,33 +53,32 @@
 
             <!-- お気に入り機能 -->
             <div class="mt-4">
-                <form method="POST" action="{{ route('restaurants.favorite', $restaurant) }}">
-                    @csrf
-                    @auth
-                        @if(Auth::user()->premium_member)
-                            @if($restaurant->isFavoritedBy(Auth::user()))
+                @auth
+                    @if(Auth::user()->premium_member)
+                        @if($restaurant->isFavoritedBy(Auth::user()))
+                            <form method="POST" action="{{ route('restaurants.favorite', $restaurant) }}">
+                                @csrf
                                 <button type="submit" class="btn kadai_002-favorite-button text-favorite w-100">
                                     <i class="fa fa-heart"></i> お気に入り解除
                                 </button>
-                            @else
+                            </form>
+                        @else
+                            <form method="POST" action="{{ route('restaurants.favorite', $restaurant) }}">
+                                @csrf
                                 <button type="submit" class="btn kadai_002-favorite-button text-favorite w-100">
                                     <i class="fa fa-heart"></i> お気に入り
                                 </button>
-                            @endif
-                        @else
-                            <a href="{{ route('subscription.create') }}" class="btn kadai_002-favorite-button text-favorite w-100" onclick="event.preventDefault(); document.getElementById('upgrade-form-favorite').submit();">
-                                <i class="fa fa-heart"></i> お気に入り
-                            </a>
-                            <form id="upgrade-form-favorite" action="{{ route('subscription.create') }}" method="GET" style="display: none;">
-                                @csrf
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-outline-success">お気に入り</a>
-                    @endauth
-                </form>
+                        <a href="{{ route('subscription.create') }}" class="btn kadai_002-favorite-button text-favorite w-100">
+                            <i class="fa fa-heart"></i> お気に入り
+                        </a>
+                    @endif
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-outline-success">お気に入り</a>
+                @endauth
             </div>
-        </div>
 
         <!-- レビューリスト -->
         <div class="offset-1 col-11 mt-4">

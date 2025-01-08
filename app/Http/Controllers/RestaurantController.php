@@ -208,6 +208,15 @@ class RestaurantController extends Controller
 
     public function favorite(Restaurant $restaurant)
     {
+        // ユーザーを取得
+    $user = Auth::user();
+
+    // 有料会員か確認
+    if (!$user->premium_member) {
+        return redirect()->route('subscription.create')
+            ->with('error', 'お気に入り機能は有料会員限定です。');
+    }
+    
         Auth::user()->togglefavorite($restaurant);
 
         return back()->with('success', 'お気に入り状態が更新されました。');
