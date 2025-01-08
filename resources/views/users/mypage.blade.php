@@ -85,10 +85,10 @@
                     <div class="col-9 d-flex align-items-center ms-2 mt-3">
                         <div class="d-flex flex-column">
                             <label for="user-name">有料会員ステータス</label>
-                            <p>現在の会員ステータスを確認できます</p>
-
+                            <p>現在の会員ステータスの確認</p>
                             @if($user->subscribed('default') && !$user->subscription('default')->ended())
                                 <!-- サブスクリプションがアクティブな場合、有料会員向けのボタンやメッセージを表示 -->
+                                <a href="{{ route('subscription.edit') }}" class="btn btn-link">カード情報を編集する</a>
                                 <form action="{{ route('subscription.cancel') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger">有料会員を解約する</button>
