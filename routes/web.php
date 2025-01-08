@@ -50,17 +50,8 @@ Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
     Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
     Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
     Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
-
     Route::post('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
-
     Route::get('/restaurants/{restaurant}/reviews', [ReviewController::class, 'index'])->name('restaurants.reviews.index');
-
-
-/* Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite'); */
-
-/* Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show'); */
-
-/* Route::middleware(['auth', 'verified', 'subscribed'])->group(function () { */
     Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
     Route::get('/restaurants/{restaurant}/reservations/create', [ReservationController::class, 'create'])->name('restaurants.reservations.create');
     Route::post('/restaurants/reservations/store', [ReservationController::class, 'store'])->name('restaurants.reservations.store');
