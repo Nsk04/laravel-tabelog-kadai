@@ -70,6 +70,7 @@ Route::post('/subscription/store', [SubscriptionController::class, 'store'])->na
 Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 Route::get('/subscription/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit');
 Route::post('/subscription/update', [SubscriptionController::class, 'update'])->name('subscription.update');
+Route::get('/subscription/complete', [SubscriptionController::class, 'complete'])->name('subscription.complete');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

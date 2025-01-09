@@ -24,6 +24,7 @@
 
         <!-- Stripe Elementsでカード情報を入力 -->
         <div id="card-element" class="form-control"></div>
+        <div id="card-errors" class="text-danger mt-2"></div> <!-- エラーメッセージ表示エリア -->
 
         <button id="card-button" class="btn btn-primary mt-3" data-secret="{{ $intent->client_secret }}">
             サブスクリプション開始
@@ -34,11 +35,45 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
+    // Stripe初期化
     const stripe = Stripe('{{ env('STRIPE_KEY') }}');
     const elements = stripe.elements();
-    const cardElement = elements.create('card');
+
+    // カード入力のスタイル設定
+    const style = {
+        base: {
+            fontSize: '16px',
+            color: '#32325d',
+            '::placeholder': {
+                color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+        }
+    };
+
+    // カード要素を作成（hidePostalCodeを含める）
+    const cardElement = elements.create('card', { 
+        style: style, 
+        hidePostalCode: true 
+    });
     cardElement.mount('#card-element');
 
+    // エラー表示用
+    const cardErrors = document.getElementById('card-errors');
+
+    // カード要素のイベントリスナー（エラー処理）
+    cardElement.addEventListener('change', function(event) {
+        if (event.error) {
+            cardErrors.textContent = event.error.message;
+        } else {
+            cardErrors.textContent = '';
+        }
+    });
+
+    // フォーム送信処理
     const cardHolderName = document.getElementById('card-holder-name');
     const cardButton = document.getElementById('card-button');
     const clientSecret = cardButton.dataset.secret;
@@ -56,12 +91,20 @@
         );
 
         if (error) {
-            // エラーハンドリング
+            // エラーを表示
             console.error(error);
+            cardErrors.textContent = error.message;
         } else {
-            // 支払い成功時にフォームを送信
-            document.getElementById('payment-form').submit();
+            // setupIntent.payment_method をhiddenフィールドにセットしてフォームを送信
+            const form = document.getElementById('payment-form');
+            const hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'payment_method');
+            hiddenInput.setAttribute('value', setupIntent.payment_method);
+            form.appendChild(hiddenInput);
+            form.submit();
         }
     });
 </script>
+
 @endsection

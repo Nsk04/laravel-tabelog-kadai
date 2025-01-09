@@ -38,15 +38,15 @@
                 <div class="mt-4">
                     @auth
                         @if(Auth::user()->premium_member)
-                            <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-primary">予約する</a>
+                            <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-outline-success w-100">予約する</a>
                         @else
-                            <a href="{{ route('subscription.create') }}" class="btn btn-outline-success" onclick="event.preventDefault(); document.getElementById('upgrade-form-reservation').submit();">予約する</a>
+                            <a href="{{ route('subscription.create') }}" class="btn btn-outline-success w-100" onclick="event.preventDefault(); document.getElementById('upgrade-form-reservation').submit();">予約する</a>
                             <form id="upgrade-form-reservation" action="{{ route('subscription.create') }}" method="GET" style="display: none;">
                                 @csrf
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-outline-success">予約する</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-success w-100">予約する</a>
                     @endauth
                 </div>
             </div>
@@ -58,25 +58,25 @@
                         @if($restaurant->isFavoritedBy(Auth::user()))
                             <form method="POST" action="{{ route('restaurants.favorite', $restaurant) }}">
                                 @csrf
-                                <button type="submit" class="btn kadai_002-favorite-button text-favorite w-100">
+                                <button type="submit" class="btn btn-outline-success w-100">
                                     <i class="fa fa-heart"></i> お気に入り解除
                                 </button>
                             </form>
                         @else
                             <form method="POST" action="{{ route('restaurants.favorite', $restaurant) }}">
                                 @csrf
-                                <button type="submit" class="btn kadai_002-favorite-button text-favorite w-100">
+                                <button type="submit" class="btn btn-outline-success w-100">
                                     <i class="fa fa-heart"></i> お気に入り
                                 </button>
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('subscription.create') }}" class="btn kadai_002-favorite-button text-favorite w-100">
+                        <a href="{{ route('subscription.create') }}" class="btn btn-outline-success w-100">
                             <i class="fa fa-heart"></i> お気に入り
                         </a>
                     @endif
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-outline-success">お気に入り</a>
+                    <a href="{{ route('login') }}" class="btn btn-outline-success w-100">お気に入り</a>
                 @endauth
             </div>
 
@@ -129,13 +129,13 @@
                                 <button type="submit" class="btn btn-info w-50">レビューを追加</button>
                             </form>
                         @else
-                            <a href="{{ route('subscription.create') }}" class="btn btn-info w-50" onclick="event.preventDefault(); document.getElementById('upgrade-form-review').submit();">レビューを追加</a>
+                            <a href="{{ route('subscription.create') }}" class="btn btn-outline-success w-100" onclick="event.preventDefault(); document.getElementById('upgrade-form-review').submit();">レビューを追加</a>
                             <form id="upgrade-form-review" action="{{ route('subscription.create') }}" method="GET" style="display: none;">
                                 @csrf
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-outline-success">レビューを追加</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-success w-100">レビューを追加</a>
                     @endauth
                 </div>
             </div>

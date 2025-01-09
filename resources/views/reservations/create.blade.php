@@ -117,7 +117,7 @@
                         <div class="col-md-7">
                             <select class="form-select" id="reservation_people" name="reservation_people">
                                 <option value="" hidden>選択してください</option>
-                                @for ($i = 1; $i <=50; $i++)
+                                @for ($i = 1; $i <=5; $i++)
                                     <option value="{{ $i }}">{{ $i }}名</option>
                                 @endfor
                             </select>
@@ -128,6 +128,9 @@
                         <button type="submit" class="btn text-black shadow-sm w-50 kadai_002-btn">予約する</button>
                     </div>
                 </form>
+
+                <hr>
+                <a>※予約人数が５名様以上の場合、お電話にてお問い合わせお願いいたします。</a>
 
             </div>
         </div>

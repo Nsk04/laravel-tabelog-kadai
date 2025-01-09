@@ -16,6 +16,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="https://kit.fontawesome.com/aca0c0e746.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/kadai_002.css') }}" rel="stylesheet">
