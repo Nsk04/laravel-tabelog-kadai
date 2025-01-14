@@ -30,8 +30,12 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $user->refresh(); // ユーザー情報をリフレッシュ
+
         $request->validate([
-            'content' => 'required'
+            'content' => 'required',
+            'score' => 'required|integer|min:1|max:5',
     ]);
 
         $review = new Review();

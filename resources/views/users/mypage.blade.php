@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="{{route('mypage')}}">
+                    <a href="{{route('reservations.index')}}">
                         <i class="fas fa-chevron-right fa-2x"></i>
                     </a>
                 </div>
@@ -86,17 +86,23 @@
                         <div class="d-flex flex-column">
                             <label for="user-name">有料会員ステータス</label>
                             <p>現在の会員ステータスの確認</p>
-                            @if($user->subscribed('default') && !$user->subscription('default')->ended())
-                                <!-- サブスクリプションがアクティブな場合、有料会員向けのボタンやメッセージを表示 -->
-                                <a href="{{ route('subscription.edit') }}" class="btn btn-link">カード情報を編集する</a>
-                                <form action="{{ route('subscription.cancel') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">有料会員を解約する</button>
-                                </form>
+                            @auth
+                                @if(Auth::user()->subscribed('default') && !Auth::user()->subscription('default')->ended())
+                                    <!-- サブスクリプションがアクティブな場合、有料会員向けのボタンやメッセージを表示 -->
+                                    <a href="{{ route('subscription.edit') }}" class="btn btn-link">カード情報を編集する</a>
+                                    <form action="{{ route('subscription.cancel') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">有料会員を解約する</button>
+                                    </form>
+                                @else
+                                    <!-- サブスクリプションがキャンセル済みまたは無効な場合 -->
+                                    <p>現在無料会員です。</p>
+                                @endif
                             @else
-                                <!-- サブスクリプションがキャンセル済みまたは無効な場合 -->
-                                <p>現在無料会員です。</p>
-                            @endif
+                                <!-- ログインしていない場合の表示 -->
+                                <p>ログインしてください。</p>
+                            @endauth
+                        </div>
                     </div>
                 </div>
             </div>

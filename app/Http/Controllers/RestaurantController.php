@@ -210,6 +210,7 @@ class RestaurantController extends Controller
     {
         // ユーザーを取得
     $user = Auth::user();
+    $user->refresh(); // ユーザー情報をリフレッシュ
 
     // 有料会員か確認
     if (!$user->premium_member) {

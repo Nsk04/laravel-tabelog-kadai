@@ -30,7 +30,11 @@ class SubscriptionController extends Controller
 
             // 有料会員フラグを設定
             $user->premium_member = true;
+            $user->premium_member_expiration = now()->addMonth(); // 1か月間有効
             $user->save();
+
+            // ユーザー情報をリフレッシュ
+            $user->refresh();
 
             return redirect()->route('subscription.complete')->with('success', '有料会員に登録されました。'); // リダイレクト先変更
         } catch (\Exception $e) {
