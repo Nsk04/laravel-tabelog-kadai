@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Subscribed
+class NotSubscribed
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,9 @@ class Subscribed
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->user()?->subscribed('premium_member')) {
-            return redirect('subscription/create');
-        }
-
-        // すべてのチェックを通過したら次のリクエストに進む
+        if ($request->user()?->subscribed('premium_member')) {
+            return redirect('subscription/edit');
+        }   
         return $next($request);
     }
 }

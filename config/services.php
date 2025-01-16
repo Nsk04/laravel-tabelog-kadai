@@ -32,8 +32,8 @@ return [
     ],
 
     'stripe' => [
-    'key' => env('pk_test_51Q7BKB04OpOW60oOfTcC2fGsxlQgqhlXSomQIPMuFNy1QPsoSbhbgQOkbmYpmZJvTw5KwaezkWShWA1g3ZLC0cOq00HWhm5oMf'),
-    'secret' => env('sk_test_51Q7BKB04OpOW60oOYV70Syf8be4dycbKBID2tKhJTJZChXnijkFzSL49csOEvG355y6VAOwAVJNEN8pNPKKwoK3800P9B4QVPZ'),
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
     ],
 
 ];
