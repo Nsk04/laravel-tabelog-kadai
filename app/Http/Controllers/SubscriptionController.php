@@ -10,6 +10,7 @@ class SubscriptionController extends Controller
     public function create()
     {
         // ユーザーのSetup Intentを取得して、カード登録用のクライアントシークレットを取得
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         $intent = Auth::user()->createSetupIntent();
 
         return view('subscription.create', ['intent' => $intent]);
