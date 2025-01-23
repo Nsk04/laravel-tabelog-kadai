@@ -59,13 +59,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // 未加入ユーザー
-    Route::middleware(['notsubscribed'])->group(function () {
+    Route::group(['middleware' => [NotSubscription::class]], function () {
         Route::get('/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
         Route::post('/subscription', [SubscriptionController::class, 'store'])->name('subscription.store');
     });
 
     // サブスクリプション加入
-    Route::middleware(['subscribed'])->group(function () {
+    Route::group(['middleware' => [CheckSubscription::class]], function () {
         // レビュー関連
         Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
         Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');

@@ -214,6 +214,7 @@ class RestaurantController extends Controller
 
     // 有料会員か確認
     if (!$user->premium_member) {
+        dd('お気に入り');
         return redirect()->route('subscription.create')
             ->with('error', 'お気に入り機能は有料会員限定です。');
     }

@@ -15,7 +15,7 @@ class CheckSubscription
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->user()?->subscribed('premium_member')) {
+        if (! $request->user()->premium_member) {
             return redirect('subscription/create');
         }
 

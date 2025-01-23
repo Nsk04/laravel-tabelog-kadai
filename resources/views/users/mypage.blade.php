@@ -87,7 +87,7 @@
                             <label for="user-name">有料会員ステータス</label>
                             <p>現在の会員ステータスの確認</p>
                             @auth
-                                @if(Auth::user()->subscribed('default') && !Auth::user()->subscription('default')->ended())
+                                @if(Auth::user()->premium_member)
                                     <!-- サブスクリプションがアクティブな場合、有料会員向けのボタンやメッセージを表示 -->
                                     <a href="{{ route('subscription.edit') }}" class="btn btn-link">カード情報を編集する</a>
                                     <form action="{{ route('subscription.cancel') }}" method="POST">
