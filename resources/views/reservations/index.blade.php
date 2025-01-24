@@ -29,7 +29,7 @@
             <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10">
                 <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('top') }}">ホーム</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('top') }}">トップ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">予約一覧</li>
                     </ol>
                 </nav>
