@@ -125,7 +125,7 @@
                     </div>
 
                     <div class="form-group d-flex justify-content-center mb-4">
-                        <button type="submit" class="btn text-black shadow-sm w-50 kadai_002-btn">予約する</button>
+                        <button type="submit" class="btn btn-outline-success w-100">予約する</button>
                     </div>
                 </form>
 

@@ -135,7 +135,7 @@
                                 @enderror
                                 <textarea name="content" class="form-control m-2"></textarea>
                                 <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
-                                <button type="submit" class="btn btn-info w-50">レビューを追加</button>
+                                <button type="submit" class="btn btn-outline-success w-100">レビューを追加</button>
                             </form>
                         @else
                             <a href="{{ route('subscription.create') }}" class="btn btn-outline-success w-100" onclick="event.preventDefault(); document.getElementById('upgrade-form-review').submit();">レビューを追加</a>

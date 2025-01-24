@@ -31,8 +31,5 @@
         @method('DELETE')
         <button type="submit" class="btn btn-danger mt-3">削除</button>
     </form>
-    @else
-        <p class="text-danger">このレビューを編集・削除する権限がありません。</p>
-    @endif
 </div>
 @endsection
