@@ -34,6 +34,8 @@
                 <p class="">{{ $restaurant->post_code }}</p>
                 <p class="">{{ $restaurant->address }}</p>
 
+                <hr>
+
                 <!-- 予約ボタン -->
                 <div class="mt-4">
                     @auth
@@ -49,9 +51,10 @@
                                 @csrf
                             </form>
                         @endif
-                    @else
+                        @else
                         <a href="{{ route('login') }}" class="btn btn-outline-success w-100">予約する</a>
                     @endauth
+                        <a>※当日ご予約はお電話にて承っております。</a>
                 </div>
             </div>
 

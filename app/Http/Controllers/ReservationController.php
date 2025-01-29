@@ -58,14 +58,12 @@ class ReservationController extends Controller
     $openingTime = Carbon::createFromFormat('H:i:s', $restaurant->open_time);
     $closingTime = Carbon::createFromFormat('H:i:s', $restaurant->close_time)->subHours(2); // 閉店2時間前
 
-    // minTime は、現在時刻が開店時間を過ぎている場合は現在時刻、そうでなければ開店時間
     $minReservationTime = $now->gt($openingTime) ? $now->format('H:i') : $openingTime->format('H:i');
 
-    // maxTime は閉店時間の2時間前
     $maxReservationTime = $closingTime->format('H:i');
 
-    // 定休日の処理
     $closedDays = $this->parseClosedDays($restaurant->closed_day);
+    /* dd($closedDays); */
 
     return view('reservations.create', compact('restaurant', 'closedDays', 'minReservationTime', 'maxReservationTime'));
     }
@@ -87,16 +85,12 @@ class ReservationController extends Controller
             "土" => 6, // 土曜日
         ];
     
-        // 定休日の文字列が空の場合は空の配列を返す
         if (empty($closedDayText)) {
-            return []; // 定休日が設定されていない場合は空の配列を返す
+            return [];
         }
     
-       // 定休日が "月曜日" のような形式で保存されていると仮定
-    // 「月」という部分を抽出する
-    $dayChar = mb_substr($closedDayText, 0, 1); // "月", "火", "水", "木", "金", "土", "日" を取得
+    $dayChar = mb_substr($closedDayText, 0, 1);
 
-    // 曜日に対応する数値を返す (該当する曜日がない場合は null を返す)
     return isset($dayOfWeekMap[$dayChar]) ? [$dayOfWeekMap[$dayChar]] : [];
     } 
 
