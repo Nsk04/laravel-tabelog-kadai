@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @push('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" crossorigin="anonymous" >
 @endpush
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/ja.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/ja.min.js" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const closedDays = @json($closedDays);
@@ -15,18 +15,25 @@
                 enableTime: false,
                 dateFormat: "Y-m-d",
                 locale: "ja",
-                minDate: "today",
+                minDate: "tomorrow",
                 disable: [
                     function(date) {
                         const dayOfWeek = date.getDay();
                         return closedDays.includes(dayOfWeek);
                     }
                 ],
+                onChange: function(selectedDates, dateStr) {
+                    updateTimePicker(dateStr);
+                }
             });
 
-            console.log("Min time: {{ $minReservationTime }}");
-            console.log("Max time: {{ $maxReservationTime }}");
+            function updateTimePicker(selectedDate) {
+            const minTime = "{{ $minReservationTime }}";
+            const maxTime = "{{ $maxReservationTime }}";
 
+           /*  console.log("Min time: {{ $minReservationTime }}");
+            console.log("Max time: {{ $maxReservationTime }}");
+ */
             flatpickr("#reservation_time", {
                 enableTime: true, 
                 noCalendar: true, 
@@ -35,11 +42,12 @@
                 minuteIncrement: 30,
                 minTime: "{{ $minReservationTime }}",  // 予約可能開始時刻
                 maxTime: "{{ $maxReservationTime }}",  // 予約可能終了時刻
-                onReady: function() {
+                /* onReady: function() {
                     console.log("Flatpickr initialized with minTime:", "{{ $minReservationTime }}");
-                    console.log("Flatpickr initialized with maxTime:", "{{ $maxReservationTime }}");
-                }
-            });
+                    console.log("Flatpickr initialized with maxTime:", "{{ $maxReservationTime }}"); */
+                });
+            }
+            updateTimePicker();
         });
     </script>
 @endpush

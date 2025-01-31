@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="mt-3 btn kadai_002-submit-button w-100">
+                    <button type="submit" class="mt-3 btn btn-outline-success w-100">
                         ログイン
                     </button>
 
