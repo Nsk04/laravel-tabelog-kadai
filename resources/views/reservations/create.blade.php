@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
 @push('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" crossorigin="anonymous" >
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" crossorigin="anonymous" >
 @endpush
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/ja.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js" crossorigin="anonymous"></script>
     <script>
+        import 'flatpickr/dist/flatpickr.min.css';
         document.addEventListener('DOMContentLoaded', function () {
-            const closedDays = @json($closedDays);
+            const closedDays = '{{$closedDays}}';
+
+            console.log(closedDays)
 
             flatpickr("#reservation_date", {
                 enableTime: false,
@@ -31,28 +34,20 @@
             const minTime = "{{ $minReservationTime }}";
             const maxTime = "{{ $maxReservationTime }}";
 
-           /*  console.log("Min time: {{ $minReservationTime }}");
-            console.log("Max time: {{ $maxReservationTime }}");
- */
             flatpickr("#reservation_time", {
                 enableTime: true, 
                 noCalendar: true, 
                 dateFormat: "H:i",
                 time_24hr: true,
                 minuteIncrement: 30,
-                minTime: "{{ $minReservationTime }}",  // 予約可能開始時刻
-                maxTime: "{{ $maxReservationTime }}",  // 予約可能終了時刻
-                /* onReady: function() {
-                    console.log("Flatpickr initialized with minTime:", "{{ $minReservationTime }}");
-                    console.log("Flatpickr initialized with maxTime:", "{{ $maxReservationTime }}"); */
+                minTime: "{{ $minReservationTime }}",
+                maxTime: "{{ $maxReservationTime }}",
                 });
             }
             updateTimePicker();
         });
     </script>
 @endpush
-
-
 
 @section('content')
     <div class="container kadai_002-container pb-5">

@@ -56,7 +56,7 @@ class ReservationController extends Controller
 
     // 開店時間と閉店時間
     $openingTime = Carbon::createFromFormat('H:i:s', $restaurant->open_time);
-    $closingTime = Carbon::createFromFormat('H:i:s', $restaurant->close_time)->subHours(2); // 閉店2時間前
+    $closingTime = Carbon::createFromFormat('H:i:s', $restaurant->close_time);
 
     $minReservationTime = $now->gt($openingTime) ? $now->format('H:i') : $openingTime->format('H:i');
 
@@ -74,24 +74,23 @@ class ReservationController extends Controller
      */
     private function parseClosedDays($closedDayText)
     {
-        // 曜日と対応する配列を作成 (0: 日曜日, 1: 月曜日, ...)
         $dayOfWeekMap = [
-            "日" => 0, // 日曜日
-            "月" => 1, // 月曜日
-            "火" => 2, // 火曜日
-            "水" => 3, // 水曜日
-            "木" => 4, // 木曜日
-            "金" => 5, // 金曜日
-            "土" => 6, // 土曜日
+            "日" => 0,
+            "月" => 1,
+            "火" => 2,
+            "水" => 3,
+            "木" => 4,
+            "金" => 5,
+            "土" => 6,
         ];
     
         if (empty($closedDayText)) {
-            return [];
+            return 7;
         }
     
     $dayChar = mb_substr($closedDayText, 0, 1);
 
-    return isset($dayOfWeekMap[$dayChar]) ? [$dayOfWeekMap[$dayChar]] : [];
+    return isset($dayOfWeekMap[$dayChar]) ? $dayOfWeekMap[$dayChar] : 7;
     } 
 
     /**
