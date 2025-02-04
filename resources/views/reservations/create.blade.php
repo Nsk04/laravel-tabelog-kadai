@@ -1,54 +1,5 @@
 @extends('layouts.app')
 
-@push('styles')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" crossorigin="anonymous" >
-@endpush
-
-@push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js" crossorigin="anonymous"></script>
-    <script>
-        import 'flatpickr/dist/flatpickr.min.css';
-        document.addEventListener('DOMContentLoaded', function () {
-            const closedDays = '{{$closedDays}}';
-
-            console.log(closedDays)
-
-            flatpickr("#reservation_date", {
-                enableTime: false,
-                dateFormat: "Y-m-d",
-                locale: "ja",
-                minDate: "tomorrow",
-                disable: [
-                    function(date) {
-                        const dayOfWeek = date.getDay();
-                        return closedDays.includes(dayOfWeek);
-                    }
-                ],
-                onChange: function(selectedDates, dateStr) {
-                    updateTimePicker(dateStr);
-                }
-            });
-
-            function updateTimePicker(selectedDate) {
-            const minTime = "{{ $minReservationTime }}";
-            const maxTime = "{{ $maxReservationTime }}";
-
-            flatpickr("#reservation_time", {
-                enableTime: true, 
-                noCalendar: true, 
-                dateFormat: "H:i",
-                time_24hr: true,
-                minuteIncrement: 30,
-                minTime: "{{ $minReservationTime }}",
-                maxTime: "{{ $maxReservationTime }}",
-                });
-            }
-            updateTimePicker();
-        });
-    </script>
-@endpush
-
 @section('content')
     <div class="container kadai_002-container pb-5">
         <div class="row justify-content-center">

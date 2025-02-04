@@ -15,8 +15,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="https://kit.fontawesome.com/aca0c0e746.js" crossorigin="anonymous"></script>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js','resources/js/flatpickr.js'])
 
     <!-- Styles -->
     <link href="{{ asset('css/kadai_002.css') }}" rel="stylesheet">
