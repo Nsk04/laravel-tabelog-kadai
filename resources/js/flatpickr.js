@@ -18,25 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return closedDays.includes(dayOfWeek);
             }
         ],
-        onChange: function(selectedDates, dateStr) {
-            updateTimePicker(dateStr);
-        }
     });
-
-    function updateTimePicker(selectedDate) {
-    const minTime = "{{ $minReservationTime }}";
-    const maxTime = "{{ $maxReservationTime }}";
-
-    flatpickr("#reservation_time", {
-        enableTime: true, 
-        noCalendar: true, 
-        dateFormat: "H:i",
-        time_24hr: true,
-        minuteIncrement: 30,
-        minTime: "{{ $minReservationTime }}",
-        maxTime: new Date(new Date().setHours(closeHour - 2, closeMinute, 0)), 
-        });
-    }
-    updateTimePicker();
-    });
+});
 

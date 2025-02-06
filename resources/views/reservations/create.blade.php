@@ -53,7 +53,7 @@
                         <div class="col-md-7">
                             <select class="form-control form-select" id="reservation_time" name="reservation_time">
                                 <option value="" hidden>選択してください</option>
-                                @for ($i = 0; $i <= (strtotime($restaurant->close_time) - strtotime($restaurant->open_time)) / 1800; $i++)
+                                @for ($i = 0; $i <= (strtotime($restaurant->close_time . ' -2 hours') - strtotime($restaurant->open_time)) / 1800; $i++)
                                     {{ $reservation_time = date('H:i', strtotime($restaurant->open_time . '+' . $i * 30 . 'minute')) }}
                                     @if ($reservation_time == old('reservation_time'))
                                         <option value="{{ $reservation_time }}" selected>{{ $reservation_time }}</option>
@@ -89,4 +89,7 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        @vite(['resources/js/flatpickr.js'])
+    @endpush
 @endsection

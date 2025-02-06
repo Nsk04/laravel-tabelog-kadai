@@ -49,23 +49,11 @@ class ReservationController extends Controller
         return redirect()->route('subscription.create')
             ->with('error', '予約を行うには有料会員である必要があります。');
     }
-    
-    
-     // 現在時刻を取得
-    $now = Carbon::now();
-
-    // 開店時間と閉店時間
-    $openingTime = Carbon::createFromFormat('H:i:s', $restaurant->open_time);
-    $closingTime = Carbon::createFromFormat('H:i:s', $restaurant->close_time);
-
-    $minReservationTime = $now->gt($openingTime) ? $now->format('H:i') : $openingTime->format('H:i');
-
-    $maxReservationTime = $closingTime->format('H:i');
 
     $closedDays = $this->parseClosedDays($restaurant->closed_day);
     /* dd($closedDays); */
 
-    return view('reservations.create', compact('restaurant', 'closedDays', 'minReservationTime', 'maxReservationTime'));
+    return view('reservations.create', compact('restaurant', 'closedDays'));
     }
 
     /**
