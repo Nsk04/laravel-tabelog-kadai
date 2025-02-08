@@ -51,7 +51,8 @@ class ReservationController extends Controller
     }
 
     $closedDays = $this->parseClosedDays($restaurant->closed_day);
-    /* dd($closedDays); */
+
+   /*  dd($closedDays); */
 
     return view('reservations.create', compact('restaurant', 'closedDays'));
     }
@@ -73,12 +74,20 @@ class ReservationController extends Controller
         ];
     
         if (empty($closedDayText)) {
-            return 7;
-        }
-    
-    $dayChar = mb_substr($closedDayText, 0, 1);
+        return []; // 予約不可の曜日がない場合、空の配列を返す
+    }
 
-    return isset($dayOfWeekMap[$dayChar]) ? $dayOfWeekMap[$dayChar] : 7;
+    $closedDaysArray = explode(',', $closedDayText); // カンマ区切りで曜日を分割
+    $closedDaysNumbers = [];
+
+    foreach ($closedDaysArray as $day) {
+        $day = trim($day); // 空白を除去
+        if (isset($dayOfWeekMap[$day])) {
+            $closedDaysNumbers[] = $dayOfWeekMap[$day];
+        }
+    }
+
+    return $closedDaysNumbers; // 数値の配列を返す
     } 
 
     /**

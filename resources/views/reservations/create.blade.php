@@ -90,6 +90,9 @@
         </div>
     </div>
     @push('scripts')
-        @vite(['resources/js/flatpickr.js'])
+    <script>
+        const closedDays = @json($closedDays); // Laravel から受け取った定休日データ
+    </script>
+    @vite(['resources/js/flatpickr.js'])
     @endpush
 @endsection
