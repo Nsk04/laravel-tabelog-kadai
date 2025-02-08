@@ -39,10 +39,6 @@
                 <!-- 予約ボタン -->
                 <div class="mt-4">
                     @auth
-                        <!-- デバッグコード -->
-                        <p>デバッグ: ユーザー名 = {{ Auth::user()->name }}</p>
-                        <p>デバッグ: 有料会員ステータス = {{ Auth::user()->premium_member ? '有効' : '無効' }}</p>
-
                         @if(Auth::user()->premium_member)
                             <a href="{{ route('restaurants.reservations.create', $restaurant->id) }}" class="btn btn-outline-success w-100">予約する</a>
                         @else
@@ -62,8 +58,6 @@
             <div class="mt-4">
                 @auth
                     @if(Auth::user()->premium_member)
-                        <p>デバッグ: ユーザー名 = {{ Auth::user()->name }}</p>
-                        <p>デバッグ: 有料会員ステータス = {{ Auth::user()->premium_member ? '有効' : '無効' }}</p>
                         @if($restaurant->isFavoritedBy(Auth::user()))
                             <form method="POST" action="{{ route('restaurants.favorite', $restaurant) }}">
                                 @csrf
@@ -118,9 +112,6 @@
             <div class="row mt-4">
                 <div class="col-md-10 offset-md-1">
                     @auth
-                    <!-- デバッグコード -->
-                            <p>デバッグ: ユーザー名 = {{ Auth::user()->name }}</p>
-                            <p>デバッグ: 有料会員ステータス = {{ Auth::user()->premium_member ? '有効' : '無効' }}</p>
                         @if(Auth::user()->premium_member)
                             <form method="POST" action="{{ route('reviews.store') }}">
                                 @csrf
