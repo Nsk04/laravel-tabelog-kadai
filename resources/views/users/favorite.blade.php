@@ -29,7 +29,7 @@
                 </a>
             </div>
             <div class="col-md-3 d-flex align-items-center justify-content-end">
-                <button type="submit" class="btn ml=2 btn-info w-50">予約する</button>
+                <button type="submit" class="btn btn-outline-success w-50">予約する</button>
             </div>
             @endforeach
         </div>
