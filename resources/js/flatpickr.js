@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
         minDate: new Date().fp_incr(1), // 翌日以降を選択可能
         disable: [
             function(date) {
-                const dayOfWeek = date.getDay();
-                return closedDays.includes(dayOfWeek); // ここで定休日を無効化
+                const dayOfWeeks = date.getDay();
+                return closedDays.includes(dayOfWeeks); // ここで定休日を無効化
             }
         ],
     });
