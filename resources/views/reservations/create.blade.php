@@ -89,7 +89,6 @@
             </div>
         </div>
     </div>
-    <pre>{{ var_dump($closedDays) }}</pre>
     @push('scripts')
     <script>
         const closedDays = @json($closedDays); // Laravel から受け取った定休日データ
