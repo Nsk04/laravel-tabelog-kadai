@@ -21,7 +21,8 @@
         <div class="card-body">
             <h5>現在のカード情報</h5>
             <p>カード名義: {{ Auth::user()->card_holder_name ?? '未登録' }}</p>
-            <p>カード番号: **** **** **** {{ Auth::user()->card_last_four ?? '未登録' }}</p>
+            <p>カード番号: **** **** **** {{ Auth::user()->pm_last_four ?? '未登録' }}</p>
+            <p>カードの種類: {{ Auth::user()->pm_type ?? '未登録' }}</p>
             <p>有効期限: {{ Auth::user()->card_expiry ?? '未登録' }}</p>
         </div>
     </div>
@@ -50,7 +51,9 @@
 <script>
     const stripe = Stripe('{{ env('STRIPE_KEY') }}');
     const elements = stripe.elements();
-    const cardElement = elements.create('card');
+    const cardElement = elements.create('card', {
+    hidePostalCode: true,
+    });
     cardElement.mount('#card-element');
 
     const cardHolderName = document.getElementById('card-holder-name');

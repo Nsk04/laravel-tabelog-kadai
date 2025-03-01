@@ -19,7 +19,7 @@
 
         <div class="form-group">
             <label for="card-holder-name">カード名義</label>
-            <input id="card-holder-name" type="text" class="form-control" placeholder="カード名義を入力" required>
+            <input id="card-holder-name" name="card_holder_name" type="text" class="form-control" placeholder="カード名義を入力" required>
         </div>
 
         <!-- Stripe Elementsでカード情報を入力 -->

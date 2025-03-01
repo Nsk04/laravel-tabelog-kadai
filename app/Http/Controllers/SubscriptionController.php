@@ -18,6 +18,7 @@ class SubscriptionController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $user = Auth::user();
         $paymentMethod = $request->payment_method;
 
@@ -57,6 +58,12 @@ class SubscriptionController extends Controller
         try {
             // ユーザーの支払い方法を更新
             $user->updateDefaultPaymentMethod($paymentMethod);
+
+             // ユーザー情報を最新状態にリフレッシュ
+            $user->refresh();
+
+            // セッションのユーザー情報を再設定
+            Auth::setUser($user);
 
         return redirect()->route('subscription.edit')->with('success', 'カード情報を更新しました。');
         } catch (\Exception $e) {
