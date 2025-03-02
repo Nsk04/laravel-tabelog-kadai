@@ -85,7 +85,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // サブスクリプション管理
         Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
-        /* Route::get('/subscription/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit'); */
+        Route::get('/subscription/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit');
         Route::get('/subscription', [SubscriptionController::class, 'show'])->name('subscription.show');
         Route::post('/subscription/update', [SubscriptionController::class, 'update'])->name('subscription.update');
         Route::get('/subscription/complete', [SubscriptionController::class, 'complete'])->name('subscription.complete');
