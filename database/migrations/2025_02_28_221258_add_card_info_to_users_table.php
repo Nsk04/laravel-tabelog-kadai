@@ -14,9 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            if (!Schema::hasColumn('users', 'card_holder_name')) {
-                $table->string('card_holder_name')->nullable(); // カード名義
-            }
             if (!Schema::hasColumn('users', 'card_expiry')) {
                 $table->string('card_expiry')->nullable(); // 有効期限
             }
@@ -31,7 +28,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['card_holder_name', 'card_expiry']);
+            $table->dropColumn(['card_expiry']);
         });
     }
 };

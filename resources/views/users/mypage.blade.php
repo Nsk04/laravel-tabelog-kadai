@@ -89,7 +89,8 @@
                             @auth
                                 @if(Auth::user()->premium_member)
                                     <!-- サブスクリプションがアクティブな場合、有料会員向けのボタンやメッセージを表示 -->
-                                    <a href="{{ route('subscription.edit') }}" class="btn btn-link">カード情報を編集する</a>
+                                    <!-- <a href="{{ route('subscription.edit') }}" class="btn btn-link">カード情報を編集する</a> -->
+                                    <a href="{{ route('subscription.show') }}" class="btn btn-link">カード情報を見る</a>
                                     <form action="{{ route('subscription.cancel') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-danger">有料会員を解約する</button>

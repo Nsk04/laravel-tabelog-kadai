@@ -18,7 +18,6 @@ class SubscriptionController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $user = Auth::user();
         $paymentMethod = $request->payment_method;
 
@@ -44,7 +43,16 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function edit()
+    public function show()
+    {
+        $user = Auth::user();
+        $paymentMethod = $user->hasPaymentMethod() ? $user->defaultPaymentMethod() : null;
+
+        return view('subscription.show', compact('paymentMethod'));
+    }
+
+
+    /* public function edit()
     {
         $intent = Auth::user()->createSetupIntent();
         return view('subscription.edit', ['intent' => $intent]);
@@ -59,17 +67,11 @@ class SubscriptionController extends Controller
             // ユーザーの支払い方法を更新
             $user->updateDefaultPaymentMethod($paymentMethod);
 
-             // ユーザー情報を最新状態にリフレッシュ
-            $user->refresh();
-
-            // セッションのユーザー情報を再設定
-            Auth::setUser($user);
-
         return redirect()->route('subscription.edit')->with('success', 'カード情報を更新しました。');
         } catch (\Exception $e) {
         return redirect()->route('subscription.edit')->with('error', 'カード情報の更新に失敗しました。');
         }
-    }
+    } */
 
 
     public function cancel()
