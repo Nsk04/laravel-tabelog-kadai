@@ -40,6 +40,8 @@
             <div id="card-element" class="form-control"></div>
         </div>
 
+        <input type="hidden" name="payment_method" id="payment-method">
+
         <button id="card-button" class="btn btn-primary mt-3" data-secret="{{ $intent->client_secret }}">
             カード情報を更新する
         </button>
@@ -75,8 +77,10 @@
             console.error(error);
             alert('カード情報の更新に失敗しました。もう一度お試しください。');
         } else {
+            document.getElementById('payment-method').value = setupIntent.payment_method;
             document.getElementById('update-card-form').submit();
         }
     });
 </script>
 @endsection
+

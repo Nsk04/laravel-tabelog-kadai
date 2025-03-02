@@ -52,7 +52,7 @@ class SubscriptionController extends Controller
     }
 
 
-    /* public function edit()
+    public function edit()
     {
         $intent = Auth::user()->createSetupIntent();
         return view('subscription.edit', ['intent' => $intent]);
@@ -60,6 +60,7 @@ class SubscriptionController extends Controller
 
     public function update(Request $request)
     {
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         $user = Auth::user();
         $paymentMethod = $request->payment_method;
 
@@ -71,7 +72,7 @@ class SubscriptionController extends Controller
         } catch (\Exception $e) {
         return redirect()->route('subscription.edit')->with('error', 'カード情報の更新に失敗しました。');
         }
-    } */
+    } 
 
 
     public function cancel()
